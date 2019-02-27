@@ -22,7 +22,8 @@ const createStore = (reducer, initialState) => {
 const getInitialState = () => {
     return {
         searchResults: [],
-        movie: {}
+        movie: {},
+        movieImages: []
     }
 }
 
@@ -37,6 +38,11 @@ const reducer = (state = getInitialState(), action) => {
             return {
                 ...state,
                 movie: action.payload
+            }
+        case 'GET_MOVIE_IMAGES':
+            return {
+                ...state,
+                movieImages: action.payload
             }
         default:
             return state

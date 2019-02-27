@@ -42,10 +42,10 @@
         background: #84abf1;
         transition: 0.3s ease;
     }
-    .tab-nav__item--left.active~.tab-nav__indicator {
+    .tab-nav__item--left.active ~ .tab-nav__indicator {
         left: 0;
     }
-    .tab-nav__item--right.active~.tab-nav__indicator {
+    .tab-nav__item--right.active ~ .tab-nav__indicator {
         left: 50%;
     }
 }
@@ -63,6 +63,17 @@
     }
     .tab-content__panel {
         width: 50%;
-        padding: 10px;
+        margin-top: 20px;
+    }
+}
+
+.movie-images-carousel {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    overflow: auto hidden;
+    -webkit-overflow-scrolling: touch;
+    img {
+        height: 180px;
     }
 }

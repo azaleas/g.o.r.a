@@ -1,3 +1,5 @@
+import OverviewContent from './OverviewContent'
+
 const actions = {
     onTabItemLeft(e) {
         e.target.nextElementSibling.classList.remove('active')
@@ -29,7 +31,7 @@ const MovieItem = ({ movie }) => {
     }, 0)
 
     return `
-        <nav class="tab-nav">
+        <nav class="tab-nav js-tab-nav">
             <div class="tab-nav__item active tab-nav__item--left js-tab-nav__item--left">
                 Overview
             </div>
@@ -41,7 +43,7 @@ const MovieItem = ({ movie }) => {
         <div class="tab-content">
             <div class="tab-content__carousel js-tab-content__carousel">
                 <div class="tab-content__panel">
-                    Overview
+                    ${OverviewContent()}
                 </div>
                 <div class="tab-content__panel">
                     Cast details
