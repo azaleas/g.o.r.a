@@ -9,7 +9,11 @@ const createStore = (reducer, initialState) => {
 
     store.dispatch = action => {
         store.state = reducer(store.state, action)
-        store.listeners.forEach(listener => listener())
+        store.listeners.forEach(listener => {
+            if (listener.name === action.type) {
+                listener()
+            }
+        })
     }
 
     return store
@@ -17,17 +21,23 @@ const createStore = (reducer, initialState) => {
 
 const getInitialState = () => {
     return {
-        movies: []
+        searchResults: [],
+        movie: {}
     }
 }
 
 const reducer = (state = getInitialState(), action) => {
     switch (action.type) {
-        case 'ADD_SEARCH_RESULTS':
-            const nextState = {
+        case 'GET_SEARCH_RESULTS':
+            return {
+                ...state,
                 searchResults: action.payload
             }
-            return nextState
+        case 'GET_MOVIE_ITEM':
+            return {
+                ...state,
+                movie: action.payload
+            }
         default:
             return state
     }

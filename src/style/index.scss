@@ -2,3 +2,21 @@
     max-width: 500px;
     margin: auto;
 }
+
+.movies-list {
+    &--hidden {
+        display: none;
+    }
+    &--shown {
+        display: block;
+    }
+}
+
+.movie-item {
+    &--hidden {
+        display: none;
+    }
+    &--shown {
+        display: block;
+    }
+}
