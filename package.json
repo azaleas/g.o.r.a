@@ -22,5 +22,8 @@
     "scripts": {
         "build": "webpack --mode production",
         "dev": "webpack-dev-server --mode development --content-base dist --hot"
+    },
+    "dependencies": {
+        "axios": "^0.18.0"
     }
 }
