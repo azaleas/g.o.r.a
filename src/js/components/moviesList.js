@@ -1,4 +1,4 @@
-const moviesList = ({ moviesList }) =>
+const MoviesList = ({ moviesList }) =>
     moviesList
         .map(
             movie =>
@@ -17,4 +17,4 @@ const moviesList = ({ moviesList }) =>
         )
         .join('')
 
-export default moviesList
+export default MoviesList

@@ -1,4 +1,4 @@
-const searchForm = ({ id }) => {
+const SearchForm = ({ id }) => {
     return `
         <form id="${id}" class="form">
             <input name="search-input" class="form-input" type="text"/>
@@ -7,4 +7,4 @@ const searchForm = ({ id }) => {
     `
 }
 
-export default searchForm
+export default SearchForm

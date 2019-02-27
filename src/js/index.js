@@ -6,9 +6,9 @@ import {
 
 import { store } from './store'
 
-import searchForm from './components/searchForm'
-import moviesList from './components/moviesList'
-import movieItem from './components/movieItem'
+import SearchForm from './components/SearchForm'
+import MoviesList from './components/MoviesList'
+import MovieItem from './components/MovieItem'
 
 const actions = {
     onSearchSubmit(e) {
@@ -47,7 +47,7 @@ store.subscribe(function GET_SEARCH_RESULTS() {
         movieItemElement = document.querySelector('#movieItem')
 
     if (searchResults.length > 0) {
-        moviesListElement.innerHTML = moviesList({
+        moviesListElement.innerHTML = MoviesList({
             moviesList: searchResults
         })
         movieItemElement.classList.remove('movie-item--shown')
@@ -64,7 +64,7 @@ store.subscribe(function GET_MOVIE_ITEM() {
         movieItemElement = document.querySelector('#movieItem')
 
     if (Object.keys(movie).length > 0) {
-        movieItemElement.innerHTML = movieItem({
+        movieItemElement.innerHTML = MovieItem({
             movie
         })
         moviesListElement.classList.remove('movies-list--shown')
@@ -76,7 +76,7 @@ store.subscribe(function GET_MOVIE_ITEM() {
 
 const appMarkup = `
     <div class="container">
-        ${searchForm({ id: 'searchForm' })}
+        ${SearchForm({ id: 'searchForm' })}
         <div id="moviesList" class="movies-list">
         </div>
         <div id="movieItem" class="movie-item">
