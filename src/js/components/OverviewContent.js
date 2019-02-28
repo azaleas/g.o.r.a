@@ -9,27 +9,46 @@ const actions = {
                 payload: response
             })
         })
+    },
+
+    handleViewAllImages() {
+        alert('One day...')
     }
 }
 
 store.subscribe(function GET_MOVIE_IMAGES() {
     const state = store.getState(),
-        { movieImages } = state,
+        { movieImages, movie } = state,
         movieImagesCarouselElement = document.querySelector(
             '#movieImagesCarousel'
         )
 
     if (movieImages.length > 0) {
-        movieImagesCarouselElement.innerHTML = movieImages
-            .map(
-                element =>
+        movieImagesCarouselElement.innerHTML = `
+            ${
+                movie.Poster !== 'N/A'
+                    ? `<div class="movie-images-carousel__item">
+                            <img src="${movie.Poster}" alt="Movie Poster"/>
+                        </div>`
+                    : ``
+            }
+            ${movieImages
+                .map(
+                    element =>
+                        `
+                        <div class="movie-images-carousel__item">
+                            <img src="${element}" alt="Movie Images"/>
+                        </div>
                     `
-                    <div class="movie-images-carousel__item">
-                        <img src="${element}" alt="Movie Images"/>
-                    </div>
-                `
-            )
-            .join('')
+                )
+                .join('')}
+            <div class="movie-images-carousel__item">
+                <div class="view-all-images__wrapper cur-pointer" onclick="alert('One day...')">
+                    <i class="icon-right-arrow view-all-images__icon"></i>
+                    <p class="view-all-images__text">View all</p>
+                </div>
+            </div>
+        `
     }
 })
 
@@ -39,20 +58,6 @@ const OverviewContent = ({ movie }) => {
     }, 0)
 
     return `
-        <div class="movie-short-information">
-            <p class="movie-short-information__title">${movie.Title}</p>
-            <p class="movie-short-information__general-information">
-                <span class="movie-short-information__release-year">${
-                    movie.Year
-                }</span> ·
-                <span class="movie-short-information__genre">${
-                    movie.Genre
-                }</span> ·
-                <span class="movie-short-information__runtime">${
-                    movie.Runtime
-                }</span>
-            </p>
-        </div>
         <div class="movie-images-carousel" id="movieImagesCarousel">
 
         </div>

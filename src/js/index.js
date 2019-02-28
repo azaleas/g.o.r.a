@@ -13,7 +13,7 @@ import MovieItem from './components/MovieItem'
 const actions = {
     onGetMovie(e) {
         const movieListItem = e.target.closest('.movies-list__item'),
-            { imdbId } = movieListItem.dataset
+            imdbId = movieListItem && movieListItem.dataset.imdbId
 
         if (imdbId) {
             getMovieDataByImdbId(imdbId).then(response => {
