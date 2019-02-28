@@ -1,23 +1,132 @@
+@import 'fonts.scss';
+body {
+    margin: 0;
+    font-size: 14px;
+    font-family: 'Laila', serif;
+}
+
+p {
+    margin: 0;
+}
+
+.img-responsive {
+    max-width: 100%;
+}
+
+.mar-hor--auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.center--vertical {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.cur-pointer {
+    cursor: pointer;
+}
+
+.full-width {
+    width: 100%;
+}
+
 .container {
     max-width: 500px;
     margin: auto;
+    position: relative;
+}
+
+.container--full-height {
+    height: 100vh;
+}
+
+.form {
+    transition: 0.3s ease;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.form-input {
+    margin: 0em;
+    outline: none;
+    -webkit-appearance: none;
+    line-height: 1.21428571em;
+    padding: 0.67857143em 1em;
+    font-size: 1em;
+    background: #fafafa;
+    border: 1px solid #cccccc;
+    color: rgba(0, 0, 0, 0.87);
+    border-radius: 0.28571429rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075) inset;
+    transition: color 0.1s ease, border-color 0.1s ease;
+    width: 65vw;
+    &:focus {
+        color: rgba(0, 0, 0, 0.95);
+        border-color: #51a7e8;
+        background: #ffffff;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.075) inset,
+            0px 0px 5px rgba(81, 167, 232, 0.5);
+    }
+}
+
+.form-submit-btn {
+    border-radius: 0 0.28571429rem 0.28571429rem 0;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.icon-search {
+    &:before {
+        content: '\e900';
+    }
 }
 
 .movies-list {
-    &--hidden {
+    &.hidden {
         display: none;
     }
-    &--shown {
-        display: block;
+    &.shown {
+    }
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    .movies-list__item {
+        width: 45%;
+        margin: 1.5%;
+        border-radius: 3px;
+        background: sandybrown;
+        color: black;
+        font-weight: 600;
+        box-shadow: 0 1px 3px rgba(32, 33, 36, 0.28);
+    }
+    .movies-list__image-wrapper {
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 200px;
+        border-radius: 3px;
+        background-color: aliceblue;
+    }
+    .movies-list__information {
+        margin: 6px;
     }
 }
 
 .movie-item {
     overflow: hidden;
-    &--hidden {
+    &.hidden {
         display: none;
     }
-    &--shown {
+    &.shown {
         display: block;
     }
 }
@@ -51,15 +160,29 @@
 }
 
 .tab-content {
-    flex: 1;
     width: 200%;
     height: 100%;
     .tab-content__carousel {
         width: 100%;
         display: flex;
-        justify-content: space-between;
-        transition: 0.5s;
-        transform: translateX(0%);
+        justify-content: space-between; // transition: 0.5s; // transform: translateX(0%);
+    }
+    .tab-content__carousel--left {
+        &.shown {
+            display: block;
+        }
+        &.hidden {
+            display: none;
+        }
+    }
+    .tab-content__carousel--right {
+        display: none;
+        &.shown {
+            display: block;
+        }
+        &.hidden {
+            display: none;
+        }
     }
     .tab-content__panel {
         width: 50%;
@@ -72,8 +195,22 @@
     height: 180px;
     display: flex;
     overflow: auto hidden;
-    -webkit-overflow-scrolling: touch;
     img {
         height: 180px;
+        margin: 0 1px;
+        border-radius: 4px;
+    }
+}
+
+.movie-cast-images {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    .movie-cast-images__item {
+        width: 125px;
+        background: aliceblue;
+        margin: 4px;
+        border-radius: 7px;
+        box-shadow: 0 1px 3px rgba(32, 33, 36, 0.28);
     }
 }

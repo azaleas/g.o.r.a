@@ -1,5 +1,10 @@
 import axios from 'axios'
-import { OMDB_DATA_REQUEST_URL, PICSUM_URL } from './constants'
+import {
+    OMDB_DATA_REQUEST_URL,
+    MOVIE_IMAGES_LIST,
+    CAST_NAMES,
+    CAST_ROLES
+} from './constants'
 
 export function getMoviesDataByTitle(searchValue) {
     return axios.get(OMDB_DATA_REQUEST_URL, {
@@ -21,23 +26,21 @@ export function getMovieDataByImdbId(imdbId) {
 
 export function getMovieImages(imdbId = '') {
     return new Promise((resolve, reject) => {
-        resolve([
-            'https://www.fillmurray.com/g/200/300',
-            'https://www.placecage.com/200/500',
-            'https://www.fillmurray.com/600/400',
-            'https://www.placecage.com/250/400',
-            'https://www.fillmurray.com/g/200/400',
-            'https://www.placecage.com/g/400/500',
-            'https://www.fillmurray.com/300/400',
-            'https://www.placecage.com/300/500',
-            'https://www.fillmurray.com/g/200/500',
-            'https://www.placecage.com/200/600',
-            'https://www.fillmurray.com/300/400',
-            'https://www.placecage.com/g/600/300',
-            'https://www.fillmurray.com/400/500',
-            'https://www.placecage.com/g/800/300',
-            'https://www.fillmurray.com/250/300',
-            'https://www.placecage.com/g/200/500'
-        ])
+        resolve(MOVIE_IMAGES_LIST)
+    })
+}
+
+export function getCastImages(imdbId = '') {
+    return new Promise((resolve, reject) => {
+        let castImages = []
+        for (let i = 0; i < 25; i++) {
+            const castImage = {
+                actorImage: `//robohash.org/${i}`,
+                actorName: CAST_NAMES[i],
+                actorPlayedRole: CAST_ROLES[i]
+            }
+            castImages.push(castImage)
+        }
+        resolve(castImages)
     })
 }

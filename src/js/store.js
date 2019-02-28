@@ -23,7 +23,8 @@ const getInitialState = () => {
     return {
         searchResults: [],
         movie: {},
-        movieImages: []
+        movieImages: [],
+        castImages: []
     }
 }
 
@@ -43,6 +44,11 @@ const reducer = (state = getInitialState(), action) => {
             return {
                 ...state,
                 movieImages: action.payload
+            }
+        case 'GET_CAST_IMAGES':
+            return {
+                ...state,
+                castImages: action.payload
             }
         default:
             return state
