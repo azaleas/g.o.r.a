@@ -74,8 +74,7 @@ p {
         color: rgba(0, 0, 0, 0.95);
         border-color: #51a7e8;
         background: #ffffff;
-        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.075) inset,
-            0px 0px 5px rgba(81, 167, 232, 0.5);
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.075) inset, 0px 0px 5px rgba(81, 167, 232, 0.5);
     }
 }
 
@@ -90,8 +89,7 @@ p {
     &.hidden {
         display: none;
     }
-    &.shown {
-    }
+    &.shown {}
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
@@ -164,9 +162,7 @@ p {
         background-position: center;
         transition: background 0.8s;
         &:hover {
-            background: #af3c71
-                radial-gradient(circle, transparent 1%, #812550 1%)
-                center/15000%;
+            background: #af3c71 radial-gradient(circle, transparent 1%, #812550 1%) center/15000%;
         }
         &.active {
             font-weight: 600;
@@ -185,10 +181,10 @@ p {
         bottom: 0px;
         transition: 0.3s ease;
     }
-    .tab-nav__item--left.active ~ .tab-nav__indicator {
+    .tab-nav__item--left.active~.tab-nav__indicator {
         left: 0;
     }
-    .tab-nav__item--right.active ~ .tab-nav__indicator {
+    .tab-nav__item--right.active~.tab-nav__indicator {
         left: 50%;
     }
 }
@@ -262,6 +258,71 @@ p {
     margin-top: 10px;
     color: rgba(0, 0, 0, 0.54);
     font-style: 0.9em;
+}
+
+.movie-more-information-card {
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    border-radius: 8px;
+}
+
+.movie-ratings {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-bottom: 10px;
+    margin: 0 -10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.movie-ratings-item {
+    width: 100%;
+    &+& {
+        border-left: 1px solid #f1f1f1;
+    }
+}
+
+.movie-rating__source {
+    color: #1967d2;
+    font-size: 0.9em;
+}
+
+.movie-rating__score {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.movie-votes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 0 -10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.movie-votes__vote-icon-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.movie-votes__source {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 0.9em;
+}
+
+.movie-votes__vote-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: rgba(0, 0, 0, 0.38);
+    border: 1px solid #f1f1f1;
+    margin: 0 2px;
 }
 
 .movie-cast-images {

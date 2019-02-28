@@ -62,7 +62,7 @@ const OverviewContent = ({ movie }) => {
 
         </div>
         <div class="movie-more-information-card">
-            <div class="movie-ratings">
+            <div class="movie-ratings text-center">
                 ${movie.Ratings.map(rating => {
                     return `
                         <div class="movie-ratings-item">
@@ -83,9 +83,9 @@ const OverviewContent = ({ movie }) => {
                     } people voted for this film</p>
                     <p class="movie-votes__source">IMDb</p>
                 </div>
-                <div class="movie-votes-vote-btn-group">
-                    <input type="button" value="Up"/>
-                    <input type="button" value="Down"/>
+                <div class="movie-votes__vote-icon-wrapper">
+                    <i class="cur-pointer icon-thumbs-up movie-votes__vote-icon" onclick="alert('All votes are now closed. You snooze, you lose.')"></i>
+                    <i class="cur-pointer icon-thumbs-down movie-votes__vote-icon" onclick="alert('All votes are now closed. You snooze, you lose.')"></i>
                 </div>
             </div>
             <div class="movie-more-information">
