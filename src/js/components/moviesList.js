@@ -6,9 +6,17 @@ const MoviesList = ({ moviesList }) =>
                 <div class="movies-list__item cur-pointer" data-imdb-id=${
                     movie.imdbID
                 }>
-                    <div class="movies-list__image-wrapper" style="background-image: url(${
-                        movie.Poster !== 'N/A' ? movie.Poster : ''
-                    })"></div>
+                    <div class="movies-list__image-wrapper" ${
+                        movie.Poster !== 'N/A'
+                            ? `style="background-image: url(${movie.Poster})`
+                            : ''
+                    }">
+                        ${
+                            movie.Poster === 'N/A'
+                                ? `<i class="movies-list__image-placeholder-icon icon-image-card"></i>`
+                                : ``
+                        }
+                    </div>
                     <div class="movies-list__information text-center">
                         <p class="movies-list__movie-title">
                             ${movie.Title}

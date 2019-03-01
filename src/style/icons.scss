@@ -1,17 +1,25 @@
 .icon-search:before {
-    content: '\e900';
+    content: "\e900";
 }
 
 .icon-thumbs-up:before {
-    content: '\e032';
+    content: "\e032";
 }
 
 .icon-thumbs-down:before {
-    content: '\e033';
+    content: "\e033";
+}
+
+.icon-image-card:before {
+    content: "\e616";
 }
 
 .icon-right-arrow:before {
-    content: '\f061';
+    content: "\f061";
+}
+
+.icon-caret-down:before {
+    content: "\f078";
 }
 
 [class^='icon-'],

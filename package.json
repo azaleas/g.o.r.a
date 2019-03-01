@@ -27,6 +27,7 @@
         "dev": "webpack-dev-server --mode development --content-base dist --hot"
     },
     "dependencies": {
-        "axios": "^0.18.0"
+        "axios": "^0.18.0",
+        "smoothscroll-polyfill": "^0.4.3"
     }
 }

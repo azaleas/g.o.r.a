@@ -30,7 +30,7 @@ export function getMovieImages(imdbId = '') {
     })
 }
 
-export function getCastImages(imdbId = '') {
+export function getCastImages(actors = '') {
     return new Promise((resolve, reject) => {
         let castImages = []
         for (let i = 0; i < 25; i++) {
@@ -40,6 +40,13 @@ export function getCastImages(imdbId = '') {
                 actorPlayedRole: CAST_ROLES[i]
             }
             castImages.push(castImage)
+        }
+        if (actors.length > 0 && actors !== 'N/A') {
+            actors
+                .split(', ')
+                .forEach(
+                    (actor, index) => (castImages[index].actorName = actor)
+                )
         }
         resolve(castImages)
     })

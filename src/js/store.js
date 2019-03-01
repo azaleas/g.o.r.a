@@ -24,7 +24,9 @@ const getInitialState = () => {
         searchResults: [],
         movie: {},
         movieImages: [],
-        castImages: []
+        castImages: [],
+        errorMessage: '',
+        loading: false
     }
 }
 
@@ -33,12 +35,16 @@ const reducer = (state = getInitialState(), action) => {
         case 'GET_SEARCH_RESULTS':
             return {
                 ...state,
-                searchResults: action.payload
+                searchResults: action.payload,
+                errorMessage: '',
+                loading: false
             }
         case 'GET_MOVIE_ITEM':
             return {
                 ...state,
-                movie: action.payload
+                movie: action.payload,
+                errorMessage: '',
+                loading: false
             }
         case 'GET_MOVIE_IMAGES':
             return {
@@ -49,6 +55,18 @@ const reducer = (state = getInitialState(), action) => {
             return {
                 ...state,
                 castImages: action.payload
+            }
+        case 'ERROR':
+            return {
+                ...state,
+                errorMessage:
+                    action.payload || 'Something went wrong. Try again.'
+            }
+        case 'DATA_LOADING':
+            return {
+                ...state,
+                loading: true,
+                errorMessage: ''
             }
         default:
             return state

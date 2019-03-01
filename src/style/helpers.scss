@@ -1,0 +1,42 @@
+.img-responsive {
+    max-width: 100%;
+}
+
+.mar-hor--auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.center--vertical {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.cur-pointer {
+    cursor: pointer;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+.color-blue {
+    color: $color-blue;
+}
+
+.color-blue--dark {
+    color: $color-blue--dark;
+}
+
+.color-black--transparent {
+    color: $color-black--transparent;
+}

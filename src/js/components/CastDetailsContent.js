@@ -2,8 +2,8 @@ import { getCastImages } from './../utils/remoteService'
 import { store } from './../store'
 
 const actions = {
-    loadCastImages() {
-        getCastImages().then(response => {
+    loadCastImages(actors) {
+        getCastImages(actors).then(response => {
             store.dispatch({
                 type: 'GET_CAST_IMAGES',
                 payload: response
@@ -22,15 +22,15 @@ store.subscribe(function GET_CAST_IMAGES() {
             .map(
                 item =>
                     `
-                    <div class="movie-cast-images__item">
-                        <img class="img-responsive mar-hor--auto" src="${
+                    <div class="movie-cast-item">
+                        <img class="img-responsive mar-hor--auto movie-cast-item__actor-image" src="${
                             item.actorImage
                         }" alt="${item.actorName}"/>
-                        <div class="movie-cast-images__actor-information">
-                            <p class="movie-cast-images__actor-name">${
+                        <div class="movie-cast-item__actor-information">
+                            <p class="movie-cast-item__actor-name">${
                                 item.actorName
                             }</p>
-                            <p class="movie-cast-images__actor-role">${
+                            <p class="movie-cast-item__actor-role color-black--transparent">${
                                 item.actorPlayedRole
                             }</p>
                         </div>
@@ -43,7 +43,7 @@ store.subscribe(function GET_CAST_IMAGES() {
 
 const CastDetailsContent = ({ movie }) => {
     setTimeout(() => {
-        actions.loadCastImages()
+        actions.loadCastImages(movie.Actors)
     }, 0)
 
     return `

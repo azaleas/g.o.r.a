@@ -8,20 +8,26 @@ const actions = {
         const inputValue = e.target.querySelector('[name=search-input]').value
 
         if (inputValue) {
+            store.dispatch({
+                type: 'DATA_LOADING',
+                payload: true
+            })
             getMoviesDataByTitle(inputValue).then(response => {
-                store.dispatch({
-                    type: 'GET_SEARCH_RESULTS',
-                    payload: response.data.Search
-                })
+                if (response.data.Search) {
+                    store.dispatch({
+                        type: 'GET_SEARCH_RESULTS',
+                        payload: response.data.Search
+                    })
+                } else {
+                    store.dispatch({
+                        type: 'ERROR',
+                        payload: response.data.Error
+                    })
+                }
             })
         }
     }
 }
-
-store.subscribe(function GET_SEARCH_RESULTS() {
-    const searchFormElement = document.querySelector('#searchForm')
-    searchFormElement.classList.remove('center--vertical')
-})
 
 const SearchForm = () => {
     setTimeout(() => {
@@ -30,7 +36,7 @@ const SearchForm = () => {
             .addEventListener('submit', actions.onSearchSubmit)
     }, 0)
     return `
-        <form id="searchForm" class="form center--vertical full-width">
+        <form id="searchForm" class="form mar-hor--auto">
             <input name="search-input" class="form-input" type="text" placeholder="Search..."/>
             <button type="submit" class="form-submit-btn">
                 <i class="icon-search"></i>
