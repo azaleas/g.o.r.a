@@ -14,12 +14,28 @@
     content: "\e616";
 }
 
+.icon-claim:before {
+    content: "\f024";
+}
+
+.icon-feedback:before {
+    content: "\f05a";
+}
+
 .icon-right-arrow:before {
     content: "\f061";
 }
 
+.icon-share:before {
+    content: "\f075";
+}
+
 .icon-caret-down:before {
     content: "\f078";
+}
+
+.icon-burger-slim:before {
+    content: "\f112";
 }
 
 [class^='icon-'],

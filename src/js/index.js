@@ -1,4 +1,5 @@
 import './../style/index.scss'
+import { APP_NAME } from './utils/constants'
 import { getMovieDataByImdbId } from './utils/remoteService'
 import { scrollToTop } from './utils/helperFunctions'
 
@@ -107,6 +108,11 @@ store.subscribe(function DATA_LOADING() {
 const appMarkup = `
     <div class="container container--full-height js-container">
         <div class="center--vertical full-width search-block mar-hor--auto" id="searchBlock">
+            <h1 class="appName text-center">
+                ${APP_NAME.split('')
+                    .map(el => `<span>${el}</span>`)
+                    .join('')}
+            </h1>
             ${SearchForm()}
             <div id="loadingIndicator" class="loading-indicator">
             </div>

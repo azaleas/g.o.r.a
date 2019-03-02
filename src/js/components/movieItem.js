@@ -38,6 +38,8 @@ const actions = {
 
 const MovieItem = ({ movie }) => {
     window.removeEventListener('scroll', globalEvents.onStickyHeader, true)
+    window.removeEventListener('click', globalEvents.onNavbarToggle, true)
+
     setTimeout(() => {
         document
             .querySelector('.js-tab-nav__item--left')
@@ -49,7 +51,13 @@ const MovieItem = ({ movie }) => {
         const headerElement = document.querySelector('.js-tab-nav'),
             headerElementOffsetTop = headerElement.offsetTop,
             tabContentElement = document.querySelector('.js-tab-content'),
-            containerElement = document.querySelector('.js-container')
+            containerElement = document.querySelector('.js-container'),
+            navbarDropdownMenuButtonElement = document.querySelector(
+                '.navbar-dropdown-menu__button'
+            ),
+            navbarDropdownMenuContentElement = document.querySelector(
+                '.js-navbar-dropdown-menu__content'
+            )
 
         globalEvents.onStickyHeader = e => {
             if (e.target === document) {
@@ -73,24 +81,54 @@ const MovieItem = ({ movie }) => {
             }
         }
 
+        globalEvents.onNavbarToggle = e => {
+            const navbarButtonClicked =
+                e.target === navbarDropdownMenuButtonElement ||
+                e.target.parentElement === navbarDropdownMenuButtonElement
+            if (navbarButtonClicked) {
+                navbarDropdownMenuContentElement.classList.toggle('hidden')
+            } else {
+                if (
+                    !navbarDropdownMenuContentElement.classList.contains(
+                        'hidden'
+                    )
+                ) {
+                    navbarDropdownMenuContentElement.classList.add('hidden')
+                }
+            }
+        }
+
         window.addEventListener('scroll', globalEvents.onStickyHeader, true)
+        window.addEventListener('click', globalEvents.onNavbarToggle, true)
     }, 0)
 
     return `
         <div class="navbar">
-            <div class="movie-short-information">
-                <p class="movie-short-information__title">${movie.Title}</p>
-                <p class="movie-short-information__general-information">
-                    <span class="movie-short-information__release-year">${
-                        movie.Year
-                    }</span> ·
-                    <span class="movie-short-information__genre">${
-                        movie.Genre
-                    }</span> ·
-                    <span class="movie-short-information__runtime">${
-                        movie.Runtime
-                    }</span>
-                </p>
+            <div class="navbar-info-block">
+                <div class="movie-short-information">
+                    <p class="movie-short-information__title">${movie.Title}</p>
+                    <p class="movie-short-information__general-information">
+                        <span class="movie-short-information__release-year">${
+                            movie.Year
+                        }</span> ·
+                        <span class="movie-short-information__genre">${
+                            movie.Genre
+                        }</span> ·
+                        <span class="movie-short-information__runtime">${
+                            movie.Runtime
+                        }</span>
+                    </p>
+                </div>
+                <div class="navbar-dropdown-menu">
+                    <div class="navbar-dropdown-menu__button cur-pointer js-navbar-dropdown-menu__button">
+                        <i class="icon-burger-slim"></i>
+                    </div>
+                    <div class="navbar-dropdown-menu__content color-black--transparent hidden js-navbar-dropdown-menu__content">
+                        <div class="navbar-dropdown-menu__item cur-pointer" onclick="alert('Consider it done...')"><i class="icon-share"></i><span>Share</span></div>
+                        <div class="navbar-dropdown-menu__item cur-pointer" onclick="alert('Consider it done...')"><i class="icon-claim"></i><span>Claim this knowledge panel</span></div>
+                        <div class="navbar-dropdown-menu__item cur-pointer" onclick="alert('Consider it done...')"><i class="icon-feedback"></i><span>Send feedback</span></div>
+                    </div>
+                </div>
             </div>
             <nav class="tab-nav js-tab-nav">
                 <div class="tab-nav__item cur-pointer active tab-nav__item--left js-tab-nav__item--left">
