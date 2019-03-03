@@ -43,10 +43,10 @@ const MovieItem = ({ movie }) => {
     setTimeout(() => {
         document
             .querySelector('.js-tab-nav__item--left')
-            .addEventListener('click', actions.onTabItemLeft.bind(actions))
+            .addEventListener('click', actions.onTabItemLeft)
         document
             .querySelector('.js-tab-nav__item--right')
-            .addEventListener('click', actions.onTabItemRight.bind(actions))
+            .addEventListener('click', actions.onTabItemRight)
 
         const headerElement = document.querySelector('.js-tab-nav'),
             headerElementOffsetTop = headerElement.offsetTop,
