@@ -24,9 +24,13 @@ export function getMovieDataByImdbId(imdbId) {
     })
 }
 
-export function getMovieImages(imdbId = '') {
+export function getMovieImages(movie) {
     return new Promise((resolve, reject) => {
-        resolve(MOVIE_IMAGES_LIST)
+        resolve(
+            movie.Poster !== 'N/A'
+                ? [movie.Poster, ...MOVIE_IMAGES_LIST]
+                : MOVIE_IMAGES_LIST
+        )
     })
 }
 

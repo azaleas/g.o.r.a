@@ -3,7 +3,7 @@ import MovieInformationCard from './MovieInformationCard'
 
 const OverviewContent = ({ movie }) => {
     return `
-        ${MovieImages()}
+        ${MovieImages(movie)}
         ${MovieInformationCard(movie)}
     `
 }
