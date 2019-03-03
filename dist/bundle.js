@@ -1284,9 +1284,9 @@
             onTabItemLeft: function(e) {
                 e.target.nextElementSibling.classList.remove('active'),
                     e.target.classList.add('active'),
-                    this._transitionCarouselElement('0%')
+                    this._transitionsliderElement('0%')
                 var t = document.querySelector(
-                    '.js-tab-content__carousel--left'
+                    '.js-tab-content__slider--left'
                 )
                 t.nextElementSibling.classList.remove('shown'),
                     t.nextElementSibling.classList.add('hidden'),
@@ -1296,16 +1296,16 @@
             onTabItemRight: function(e) {
                 e.target.previousElementSibling.classList.remove('active'),
                     e.target.classList.add('active'),
-                    this._transitionCarouselElement('-50%')
+                    this._transitionsliderElement('-50%')
                 var t = document.querySelector(
-                    '.js-tab-content__carousel--right'
+                    '.js-tab-content__slider--right'
                 )
                 t.previousElementSibling.classList.remove('shown'),
                     t.previousElementSibling.classList.add('hidden'),
                     t.classList.remove('hidden'),
                     t.classList.add('shown')
             },
-            _transitionCarouselElement: function(e) {}
+            _transitionsliderElement: function(e) {}
         }
         t.default = function(e) {
             var t = e.movie
@@ -1318,9 +1318,9 @@
                             .querySelector('.js-tab-nav__item--right')
                             .addEventListener('click', s.onTabItemRight.bind(s))
                 }, 0),
-                '\n        <nav class="tab-nav js-tab-nav">\n            <div class="tab-nav__item active tab-nav__item--left js-tab-nav__item--left">\n                Overview\n            </div>\n            <div class="tab-nav__item tab-nav__item--right js-tab-nav__item--right">\n                Cast details\n            </div>\n            <div class="tab-nav__indicator"></div>\n        </nav>\n        <div class="tab-content">\n            <div class="tab-content__carousel js-tab-content__carousel">\n                <div class="tab-content__panel tab-content__carousel--left js-tab-content__carousel--left">\n                    ' +
+                '\n        <nav class="tab-nav js-tab-nav">\n            <div class="tab-nav__item active tab-nav__item--left js-tab-nav__item--left">\n                Overview\n            </div>\n            <div class="tab-nav__item tab-nav__item--right js-tab-nav__item--right">\n                Cast details\n            </div>\n            <div class="tab-nav__indicator"></div>\n        </nav>\n        <div class="tab-content">\n            <div class="tab-content__slider js-tab-content__slider">\n                <div class="tab-content__panel tab-content__slider--left js-tab-content__slider--left">\n                    ' +
                     (0, r.default)({ movie: t }) +
-                    '\n                </div>\n                <div class="tab-content__panel tab-content__carousel--right js-tab-content__carousel--right">\n                    ' +
+                    '\n                </div>\n                <div class="tab-content__panel tab-content__slider--right js-tab-content__slider--right">\n                    ' +
                     (0, o.default)({ movie: t }) +
                     '\n                </div>\n            </div>\n        </div>\n    '
             )
@@ -1338,12 +1338,12 @@
             }
         o.store.subscribe(function() {
             var e = o.store.getState().movieImages,
-                t = document.querySelector('#movieImagesCarousel')
+                t = document.querySelector('#movieImagesslider')
             e.length > 0 &&
                 (t.innerHTML = e
                     .map(function(e) {
                         return (
-                            '\n                    <div class="movie-images-carousel__item">\n                        <img src="' +
+                            '\n                    <div class="movie-images-slider__item">\n                        <img src="' +
                             e +
                             '" alt="Movie Images"/>\n                    </div>\n                '
                         )
@@ -1364,7 +1364,7 @@
                     t.Genre +
                     '</span> ·\n                <span class="movie-short-information__runtime">' +
                     t.Runtime +
-                    '</span>\n            </p>\n        </div>\n        <div class="movie-images-carousel" id="movieImagesCarousel">\n\n        </div>\n        <div class="movie-more-information-card">\n            <div class="movie-ratings">\n                ' +
+                    '</span>\n            </p>\n        </div>\n        <div class="movie-images-slider" id="movieImagesslider">\n\n        </div>\n        <div class="movie-more-information-card">\n            <div class="movie-ratings">\n                ' +
                     t.Ratings.map(function(e) {
                         return (
                             '\n                        <div class="movie-ratings-item">\n                            <p class="movie-rating__score">' +

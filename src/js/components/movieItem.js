@@ -9,13 +9,13 @@ const actions = {
         e.target.nextElementSibling.classList.remove('active')
         e.target.classList.add('active')
 
-        const carouselItem = document.querySelector(
-            '.js-tab-content__carousel--left'
+        const sliderItem = document.querySelector(
+            '.js-tab-content__slider--left'
         )
-        carouselItem.nextElementSibling.classList.remove('shown')
-        carouselItem.nextElementSibling.classList.add('hidden')
-        carouselItem.classList.remove('hidden')
-        carouselItem.classList.add('shown')
+        sliderItem.nextElementSibling.classList.remove('shown')
+        sliderItem.nextElementSibling.classList.add('hidden')
+        sliderItem.classList.remove('hidden')
+        sliderItem.classList.add('shown')
 
         scrollToTop()
     },
@@ -24,13 +24,13 @@ const actions = {
         e.target.previousElementSibling.classList.remove('active')
         e.target.classList.add('active')
 
-        const carouselItem = document.querySelector(
-            '.js-tab-content__carousel--right'
+        const sliderItem = document.querySelector(
+            '.js-tab-content__slider--right'
         )
-        carouselItem.previousElementSibling.classList.remove('shown')
-        carouselItem.previousElementSibling.classList.add('hidden')
-        carouselItem.classList.remove('hidden')
-        carouselItem.classList.add('shown')
+        sliderItem.previousElementSibling.classList.remove('shown')
+        sliderItem.previousElementSibling.classList.add('hidden')
+        sliderItem.classList.remove('hidden')
+        sliderItem.classList.add('shown')
 
         scrollToTop()
     }
@@ -141,11 +141,11 @@ const MovieItem = ({ movie }) => {
             </nav>
         </div>
         <div class="tab-content js-tab-content">
-            <div class="tab-content__carousel js-tab-content__carousel">
-                <div class="tab-content__panel tab-content__carousel--left js-tab-content__carousel--left">
+            <div class="tab-content__slider js-tab-content__slider">
+                <div class="tab-content__panel tab-content__slider--left js-tab-content__slider--left">
                     ${OverviewContent({ movie })}
                 </div>
-                <div class="tab-content__panel tab-content__carousel--right js-tab-content__carousel--right">
+                <div class="tab-content__panel tab-content__slider--right js-tab-content__slider--right">
                     ${CastDetailsContent({ movie })}
                 </div>
             </div>
