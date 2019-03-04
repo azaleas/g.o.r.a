@@ -1,6 +1,7 @@
 const path = require('path'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     MiniCssExtractPlugin = require('mini-css-extract-plugin')
+AutoprefixerPlugin = require('autoprefixer')
 
 module.exports = (env, argv) => ({
     entry: {
@@ -55,6 +56,16 @@ module.exports = (env, argv) => ({
                     'css-hot-loader',
                     MiniCssExtractPlugin.loader,
                     'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [
+                                AutoprefixerPlugin({
+                                    browsers: ['last 2 version']
+                                })
+                            ]
+                        }
+                    },
                     'sass-loader'
                 ]
             }

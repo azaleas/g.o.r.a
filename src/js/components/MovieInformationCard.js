@@ -1,6 +1,6 @@
 const MovieInformationCard = movie => {
     return `
-        <div class="movie-more-information-card">
+        <div class="card">
             ${
                 movie.Ratings.length > 0
                     ? `
