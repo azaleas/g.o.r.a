@@ -8,6 +8,7 @@ import { store } from './store'
 import SearchForm from './components/SearchForm'
 import MoviesList from './components/MoviesList'
 import MovieItem from './components/MovieItem'
+import CastItem from './components/CastItem'
 
 const actions = {
     onGetMovie(e) {
@@ -49,11 +50,13 @@ store.subscribe(function GET_SEARCH_RESULTS() {
             moviesList: searchResults
         })
 
-        routeComonentElements.forEach(item =>
-            item.id !== routeElement.id
-                ? item.classList.add('hidden')
-                : item.classList.remove('hidden')
-        )
+        routeComonentElements.forEach(item => {
+            if (item.id !== routeElement.id) {
+                item.classList.add('hidden')
+                item.innerHTML = ''
+            }
+            item.classList.remove('hidden')
+        })
 
         scrollToTop()
     }
@@ -75,11 +78,13 @@ store.subscribe(function GET_MOVIE_ITEM() {
             movie
         })
 
-        routeComonentElements.forEach(item =>
-            item.id !== routeElement.id
-                ? item.classList.add('hidden')
-                : item.classList.remove('hidden')
-        )
+        routeComonentElements.forEach(item => {
+            if (item.id !== routeElement.id) {
+                item.classList.add('hidden')
+                item.innerHTML = ''
+            }
+            item.classList.remove('hidden')
+        })
 
         scrollToTop()
     }
@@ -102,15 +107,17 @@ store.subscribe(function GET_CAST_MEMBER() {
     loadingIndicatorElement.classList.remove('loading-indicator--enabled')
 
     if (Object.keys(actorInfo).length > 0) {
-        routeElement.innerHTML = MovieItem({
+        routeElement.innerHTML = CastItem({
             actorInfo
         })
 
-        routeComonentElements.forEach(item =>
-            item.id !== routeElement.id
-                ? item.classList.add('hidden')
-                : item.classList.remove('hidden')
-        )
+        routeComonentElements.forEach(item => {
+            if (item.id !== routeElement.id) {
+                item.classList.add('hidden')
+                item.innerHTML = ''
+            }
+            item.classList.remove('hidden')
+        })
 
         scrollToTop()
     }

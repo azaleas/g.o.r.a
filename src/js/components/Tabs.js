@@ -100,7 +100,9 @@ const Tabs = ({
         }
 
         window.addEventListener('scroll', globalEvents.onStickyHeader, true)
-        window.addEventListener('click', globalEvents.onNavbarToggle, true)
+        if (navBarDropDownMenuElements.length) {
+            window.addEventListener('click', globalEvents.onNavbarToggle, true)
+        }
     }, 0)
 
     return `

@@ -3,7 +3,11 @@ import { setElementAttributes } from './../utils/helperFunctions'
 import { store } from './../store'
 
 import Modal from './Modal'
-import MovieImagesSlider from './MovieImagesSlider'
+import ImagesSlider from './ImagesSlider'
+
+const properties = {
+    jsImageSliderClassIdentifier: 'js-movie-images-slider'
+}
 
 const actions = {
     loadMovieImage(movie) {
@@ -111,9 +115,7 @@ const actions = {
                 '.js-modal-nav-close'
             ),
             // screenElement = document.querySelector('.screen'),
-            sliderItemElement = e.target.closest(
-                '.js-movie-images-slider__item'
-            ),
+            sliderItemElement = e.target.closest('.js-images-slider__item'),
             targetElement = e.target
 
         if (sliderItemElement && sliderItemElement.dataset.imageIndex) {
@@ -172,21 +174,38 @@ const actions = {
     }
 }
 
+store.subscribe(function GET_MOVIE_IMAGES() {
+    const state = store.getState(),
+        { movieImages } = state,
+        movieImagesSlider = document.querySelector(
+            `.${properties.jsImageSliderClassIdentifier}`
+        )
+
+    if (movieImages.length > 0) {
+        movieImagesSlider.outerHTML = ImagesSlider({
+            jsClassIdentifier: properties.jsImageSliderClassIdentifier,
+            images: movieImages
+        })
+    }
+})
+
 const MovieImages = movie => {
     actions.loadMovieImage(movie)
 
     setTimeout(function() {
-        const imagesliderElement = document.querySelector(
-            '.movie-images-slider'
+        const imagesSliderElement = document.querySelector(
+            `.${properties.jsImageSliderClassIdentifier}`
         )
 
-        imagesliderElement.addEventListener(
+        imagesSliderElement.addEventListener(
             'click',
             actions.enableModal.bind(actions)
         )
     }, 0)
     return `
-        ${MovieImagesSlider()}
+        ${ImagesSlider({
+            jsClassIdentifier: properties.jsImageSliderClassIdentifier
+        })}
         ${Modal()}
     `
 }

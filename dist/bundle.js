@@ -1285,9 +1285,7 @@
                 e.target.nextElementSibling.classList.remove('active'),
                     e.target.classList.add('active'),
                     this._transitionsliderElement('0%')
-                var t = document.querySelector(
-                    '.js-tab-content__slider--left'
-                )
+                var t = document.querySelector('.js-tab-content__slider--left')
                 t.nextElementSibling.classList.remove('shown'),
                     t.nextElementSibling.classList.add('hidden'),
                     t.classList.remove('hidden'),
@@ -1297,9 +1295,7 @@
                 e.target.previousElementSibling.classList.remove('active'),
                     e.target.classList.add('active'),
                     this._transitionsliderElement('-50%')
-                var t = document.querySelector(
-                    '.js-tab-content__slider--right'
-                )
+                var t = document.querySelector('.js-tab-content__slider--right')
                 t.previousElementSibling.classList.remove('shown'),
                     t.previousElementSibling.classList.add('hidden'),
                     t.classList.remove('hidden'),
@@ -1343,7 +1339,7 @@
                 (t.innerHTML = e
                     .map(function(e) {
                         return (
-                            '\n                    <div class="movie-images-slider__item">\n                        <img src="' +
+                            '\n                    <div class=".images-slider__item">\n                        <img src="' +
                             e +
                             '" alt="Movie Images"/>\n                    </div>\n                '
                         )
@@ -1364,7 +1360,7 @@
                     t.Genre +
                     '</span> ·\n                <span class="movie-short-information__runtime">' +
                     t.Runtime +
-                    '</span>\n            </p>\n        </div>\n        <div class="movie-images-slider" id="movieImagesslider">\n\n        </div>\n        <div class="movie-more-information-card">\n            <div class="movie-ratings">\n                ' +
+                    '</span>\n            </p>\n        </div>\n        <div class=".images-slider" id="movieImagesslider">\n\n        </div>\n        <div class="movie-more-information-card">\n            <div class="movie-ratings">\n                ' +
                     t.Ratings.map(function(e) {
                         return (
                             '\n                        <div class="movie-ratings-item">\n                            <p class="movie-rating__score">' +

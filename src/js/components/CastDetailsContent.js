@@ -64,7 +64,7 @@ const CastDetailsContent = ({ movie }) => {
         actions.loadCastImages(movie.Actors)
         document
             .getElementById('movieCastImages')
-            .addEventListener('click', getCastMember)
+            .addEventListener('click', actions.getCastMember)
     }, 0)
 
     return `
