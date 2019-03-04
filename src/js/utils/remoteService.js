@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { store } from './../store'
+
 import {
     OMDB_DATA_REQUEST_URL,
     MOVIE_IMAGES_LIST,
@@ -35,10 +37,11 @@ export function getMovieImages(movie) {
 }
 
 export function getCastImages(actors = '') {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
         let castImages = []
         for (let i = 0; i < 25; i++) {
             const castImage = {
+                actorId: Math.floor(Math.random() * 100000) + 1,
                 actorImage: `//robohash.org/${i}`,
                 actorName: CAST_NAMES[i],
                 actorPlayedRole: CAST_ROLES[i]
@@ -53,5 +56,25 @@ export function getCastImages(actors = '') {
                 )
         }
         resolve(castImages)
+    })
+}
+
+export function getCastMember({ actorId, actorName }) {
+    const state = store.getState()
+    return new Promise(resolve => {
+        let actorImages = []
+        for (let i = 0; i < 25; i++) {
+            actorImages.push(`//robohash.org/${i}`)
+        }
+
+        const actorInfo = {
+            poster: `//robohash.org/${actorName}`,
+            actorName,
+            actorNationality: 'American',
+            actorImages,
+            actorMovies: state.searchResults
+        }
+
+        resolve(actorInfo)
     })
 }

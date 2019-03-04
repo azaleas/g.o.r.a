@@ -26,7 +26,8 @@ const getInitialState = () => {
         movieImages: [],
         castImages: [],
         errorMessage: '',
-        loading: false
+        loading: false,
+        actorInfo: {}
     }
 }
 
@@ -55,6 +56,12 @@ const reducer = (state = getInitialState(), action) => {
             return {
                 ...state,
                 castImages: action.payload
+            }
+        case 'GET_CAST_MEMBER':
+            return {
+                ...state,
+                actorInfo: action.payload,
+                loading: false
             }
         case 'ERROR':
             return {

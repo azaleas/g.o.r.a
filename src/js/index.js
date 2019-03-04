@@ -31,8 +31,10 @@ const actions = {
 store.subscribe(function GET_SEARCH_RESULTS() {
     const state = store.getState(),
         { searchResults, errorMessage } = state,
-        moviesListElement = document.querySelector('#moviesList'),
-        movieItemElement = document.querySelector('#movieItem'),
+        routeElement = document.querySelector('#moviesList'),
+        routeComonentElements = document.querySelectorAll(
+            '.js-route-component'
+        ),
         loadingIndicatorElement = document.querySelector('#loadingIndicator')
 
     loadingIndicatorElement.classList.remove('loading-indicator--enabled')
@@ -43,13 +45,15 @@ store.subscribe(function GET_SEARCH_RESULTS() {
     }
 
     if (searchResults.length > 0) {
-        moviesListElement.innerHTML = MoviesList({
+        routeElement.innerHTML = MoviesList({
             moviesList: searchResults
         })
-        movieItemElement.classList.remove('shown')
-        movieItemElement.classList.add('hidden')
-        moviesListElement.classList.remove('hidden')
-        moviesListElement.classList.add('shown')
+
+        routeComonentElements.forEach(item =>
+            item.id !== routeElement.id
+                ? item.classList.add('hidden')
+                : item.classList.remove('hidden')
+        )
 
         scrollToTop()
     }
@@ -58,20 +62,55 @@ store.subscribe(function GET_SEARCH_RESULTS() {
 store.subscribe(function GET_MOVIE_ITEM() {
     const state = store.getState(),
         { movie, errorMessage } = state,
-        moviesListElement = document.querySelector('#moviesList'),
-        movieItemElement = document.querySelector('#movieItem'),
+        routeElement = document.querySelector('#movieItem'),
+        routeComonentElements = document.querySelectorAll(
+            '.js-route-component'
+        ),
         loadingIndicatorElement = document.querySelector('#loadingIndicator')
 
     loadingIndicatorElement.classList.remove('loading-indicator--enabled')
 
     if (Object.keys(movie).length > 0) {
-        movieItemElement.innerHTML = MovieItem({
+        routeElement.innerHTML = MovieItem({
             movie
         })
-        moviesListElement.classList.remove('shown')
-        moviesListElement.classList.add('hidden')
-        movieItemElement.classList.remove('hidden')
-        movieItemElement.classList.add('shown')
+
+        routeComonentElements.forEach(item =>
+            item.id !== routeElement.id
+                ? item.classList.add('hidden')
+                : item.classList.remove('hidden')
+        )
+
+        scrollToTop()
+    }
+
+    if (errorMessage.length === 0) {
+        const errorElement = document.querySelector('#error')
+        errorElement.innerHTML = ''
+    }
+})
+
+store.subscribe(function GET_CAST_MEMBER() {
+    const state = store.getState(),
+        { actorInfo, errorMessage } = state,
+        routeElement = document.querySelector('#castItem'),
+        routeComonentElements = document.querySelectorAll(
+            '.js-route-component'
+        ),
+        loadingIndicatorElement = document.querySelector('#loadingIndicator')
+
+    loadingIndicatorElement.classList.remove('loading-indicator--enabled')
+
+    if (Object.keys(actorInfo).length > 0) {
+        routeElement.innerHTML = MovieItem({
+            actorInfo
+        })
+
+        routeComonentElements.forEach(item =>
+            item.id !== routeElement.id
+                ? item.classList.add('hidden')
+                : item.classList.remove('hidden')
+        )
 
         scrollToTop()
     }
@@ -119,9 +158,11 @@ const appMarkup = `
             <div id="error" class="error text-center mar-hor--auto">
             </div>
         </div>
-        <div id="moviesList" class="movies-list">
+        <div id="moviesList" class="movies-list js-route-component">
         </div>
-        <div id="movieItem" class="movie-item">
+        <div id="movieItem" class="movie-item js-route-component">
+        </div>
+        <div id="castItem" class="cast-item js-route-component">
         </div>
     </div>
 `

@@ -1,4 +1,4 @@
-import { getCastImages } from './../utils/remoteService'
+import { getCastImages, getCastMember } from './../utils/remoteService'
 import { store } from './../store'
 
 const actions = {
@@ -6,6 +6,22 @@ const actions = {
         getCastImages(actors).then(response => {
             store.dispatch({
                 type: 'GET_CAST_IMAGES',
+                payload: response
+            })
+        })
+    },
+
+    getCastMember(e) {
+        const elementTarget = e.target,
+            movieCastItem = elementTarget.closest('.movie-cast-item'),
+            { actorId, actorName } = movieCastItem.dataset
+
+        store.dispatch({
+            type: 'DATA_LOADING'
+        })
+        getCastMember({ actorId, actorName }).then(response => {
+            store.dispatch({
+                type: 'GET_CAST_MEMBER',
                 payload: response
             })
         })
@@ -22,7 +38,9 @@ store.subscribe(function GET_CAST_IMAGES() {
             .map(
                 item =>
                     `
-                    <div class="movie-cast-item">
+                    <div class="movie-cast-item" data-actor-id="${
+                        item.actorId
+                    }" data-actor-name="${item.actorName}">
                         <img class="img-responsive mar-hor--auto movie-cast-item__actor-image" src="${
                             item.actorImage
                         }" alt="${item.actorName}"/>
@@ -44,6 +62,9 @@ store.subscribe(function GET_CAST_IMAGES() {
 const CastDetailsContent = ({ movie }) => {
     setTimeout(() => {
         actions.loadCastImages(movie.Actors)
+        document
+            .getElementById('movieCastImages')
+            .addEventListener('click', getCastMember)
     }, 0)
 
     return `

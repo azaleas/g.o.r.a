@@ -1,11 +1,11 @@
 import MovieImages from './MovieImages'
 import MovieInformationCard from './MovieInformationCard'
 
-const OverviewContent = ({ movie }) => {
+const MovieOverviewContent = ({ movie }) => {
     return `
         ${MovieImages(movie)}
         ${MovieInformationCard(movie)}
     `
 }
 
-export default OverviewContent
+export default MovieOverviewContent
