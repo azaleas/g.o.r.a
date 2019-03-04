@@ -39,8 +39,8 @@ const actions = {
         const modalImageElements = document.querySelectorAll(
                 '.js-modal__image'
             ),
-            nextButtonElement = document.querySelector('.next'),
-            prevButtonElement = document.querySelector('.prev'),
+            nextButtonElement = document.querySelector('.js-modal-nav-next'),
+            prevButtonElement = document.querySelector('.js-modal-nav-prev'),
             modalItemsElement = document.querySelector('.js-modal-items'),
             modalItemElements = document.querySelectorAll('.js-modal-item'),
             windowWidth = window.innerWidth,
@@ -137,6 +137,12 @@ const actions = {
 
     enableModal(e) {
         const modalElement = document.querySelector('.modal'),
+            containerElement = document.querySelector('.js-container'),
+            modalNavCloseElement = document.querySelector(
+                '.js-modal-nav-close'
+            ),
+            modalNavNextElement = document.querySelector('.js-modal-nav-next'),
+            modalNavPrevElement = document.querySelector('.js-modal-nav-prev'),
             // screenElement = document.querySelector('.screen'),
             sliderItemElement = e.target.closest(
                 '.js-movie-images-slider__item'
@@ -158,13 +164,51 @@ const actions = {
             modalElement.setAttribute(
                 'style',
                 `left: ${left}px;
-            top: ${top}px;
-            right: ${window.innerWidth - scroll / 2 - right}px;
-            bottom: ${window.innerHeight - bottom}px;`
+                top: ${top}px;
+                right: ${window.innerWidth - scroll / 2 - right}px;
+                bottom: ${window.innerHeight - bottom}px;`
             )
 
             setTimeout(() => {
                 modalElement.classList.add('active')
+                if (window.innerWidth < 768) {
+                    modalNavCloseElement.setAttribute(
+                        'style',
+                        'left: 0; top: 0;'
+                    )
+                    modalNavNextElement.setAttribute('style', 'right: 0px;')
+                    modalElement.setAttribute(
+                        'style',
+                        `left: 0px;
+                        top: 0px;
+                        right: 0px;
+                        bottom: 0px;`
+                    )
+                } else {
+                    const {
+                        left,
+                        top
+                    } = containerElement.getBoundingClientRect()
+                    modalNavCloseElement.setAttribute(
+                        'style',
+                        `left: ${left}px; top: ${top}px;`
+                    )
+                    modalNavNextElement.setAttribute(
+                        'style',
+                        `right: ${left}px;`
+                    )
+                    modalNavPrevElement.setAttribute(
+                        'style',
+                        `left: ${left}px;`
+                    )
+                    modalElement.setAttribute(
+                        'style',
+                        `left: ${left}px;
+                        top: ${top}px;
+                        right: ${left}px;
+                        bottom: ${top}px;`
+                    )
+                }
             }, 0)
         }
     },
@@ -181,7 +225,7 @@ const actions = {
             windowWidth = window.innerWidth,
             state = store.getState()
 
-        document.querySelector('.prev').classList.remove('hidden')
+        document.querySelector('.js-modal-nav-prev').classList.remove('hidden')
 
         modalItemsElement.setAttribute(
             'style',
@@ -221,7 +265,7 @@ const actions = {
         }
         modalItemsElement.setAttribute('style', 'transform: translate3d(0,0,0)')
         if (activeDataIndex + 2 >= state.movieImages.length) {
-            document.querySelector('.next').classList.add('hidden')
+            document.querySelector('.js-modal-nav-next').classList.add('hidden')
         }
     },
 
@@ -237,7 +281,7 @@ const actions = {
             windowWidth = window.innerWidth,
             state = store.getState()
 
-        document.querySelector('.next').classList.remove('hidden')
+        document.querySelector('.js-modal-nav-next').classList.remove('hidden')
 
         modalItemsElement.setAttribute(
             'style',
@@ -277,7 +321,7 @@ const actions = {
         }
         modalItemsElement.setAttribute('style', 'transform: translate3d(0,0,0)')
         if (activeDataIndex < 2) {
-            document.querySelector('.prev').classList.add('hidden')
+            document.querySelector('.js-modal-nav-prev').classList.add('hidden')
         }
     }
 }
@@ -321,10 +365,10 @@ const MovieImages = movie => {
             actions.enableModal.bind(actions)
         )
         document
-            .querySelector('.next')
+            .querySelector('.js-modal-nav-next')
             .addEventListener('click', actions.next.bind(actions))
         document
-            .querySelector('.prev')
+            .querySelector('.js-modal-nav-prev')
             .addEventListener('click', actions.prev.bind(actions))
     }, 0)
     return `
@@ -332,9 +376,9 @@ const MovieImages = movie => {
 
         </div>
         <div class="modal">
-            <div class="close">X</div>
-            <button class="prev hidden">Prev</button>
-            <button class="next hidden">Next</button>
+            <div class="close js-modal-nav-close">X</div>
+            <button class="prev hidden js-modal-nav-prev">Prev</button>
+            <button class="next hidden js-modal-nav-next">Next</button>
             <div class="modal-items js-modal-items">
                 <div class="modal-item js-modal-item">
                     <div class="image">
