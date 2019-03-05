@@ -1,6 +1,10 @@
-const ImagesSlider = ({ images = [], jsClassIdentifier = '' }) => {
+const ImagesSlider = ({
+    images = [],
+    jsClassIdentifier = '',
+    classNames = []
+}) => {
     return `
-        <div class="images-slider ${jsClassIdentifier}">
+        <div class="images-slider ${jsClassIdentifier} ${classNames.join(' ')}">
             ${images
                 .map(
                     (element, index) =>

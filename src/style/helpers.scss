@@ -7,6 +7,10 @@
     margin-right: auto;
 }
 
+.pad-no {
+    padding: 0 !important;
+}
+
 .center--vertical {
     position: absolute;
     top: 50%;
@@ -27,18 +31,6 @@
 
 .hidden {
     display: none;
-}
-
-.color-blue {
-    color: $color-blue;
-}
-
-.color-blue--dark {
-    color: $color-blue--dark;
-}
-
-.color-black--transparent {
-    color: $color-black--transparent;
 }
 
 .card {
