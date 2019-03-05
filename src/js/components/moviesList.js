@@ -30,7 +30,7 @@ store.subscribe(function GET_SEARCH_RESULTS() {
         routeElement = document.getElementById(properties.id)
 
     if (searchResults.length > 0) {
-        routeElement.innerHTML = MoviesList({
+        routeElement.outerHTML = MoviesList({
             moviesList: searchResults
         })
     }
@@ -44,7 +44,9 @@ const MoviesList = ({ moviesList = [] } = {}) => {
     }, 0)
 
     return `
-    <div id="${properties.id}" class="movies-list js-route-component">
+    <div id="${
+        properties.id
+    }" class="movies-list route-component js-route-component">
         ${
             moviesList.length > 0
                 ? moviesList

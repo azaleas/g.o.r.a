@@ -101,7 +101,10 @@ const actions = {
 
         modalItemsElement.setAttribute('style', 'transform: translate3d(0,0,0)')
         modalImageElements.forEach((item, index) =>
-            item.setAttribute('src', imageSources[index])
+            setElementAttributes(item, {
+                src: imageSources[index],
+                width: `${windowWidth}px`
+            })
         )
         modalItemElements.forEach((item, index) =>
             item.setAttribute('data-modal-item-index', index)

@@ -1,7 +1,4 @@
 .movies-list {
-    &.hidden {
-        display: none;
-    }
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;

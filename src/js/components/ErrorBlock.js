@@ -48,7 +48,7 @@ store.subscribe(function GET_MOVIE_ITEM() {
 
 const ErrorBlock = () => {
     return `
-        <div id="${properties.id}" class="error">
+        <div id="${properties.id}" class="error text-center">
         </div>
     `
 }

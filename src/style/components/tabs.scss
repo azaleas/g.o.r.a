@@ -73,9 +73,7 @@
         font-size: 0.8em;
         transition: background 0.8s;
         &:hover {
-            background: #af3c71
-                radial-gradient(circle, transparent 1%, #812550 1%)
-                center/15000%;
+            background: #af3c71 radial-gradient(circle, transparent 1%, #812550 1%) center/15000%;
         }
         &.active {
             font-weight: 600;
@@ -94,16 +92,15 @@
         bottom: 0px;
         transition: 0.3s ease;
     }
-    .tab-nav__item--left.active ~ .tab-nav__indicator {
+    .tab-nav__item--left.active~.tab-nav__indicator {
         left: 0;
     }
-    .tab-nav__item--right.active ~ .tab-nav__indicator {
+    .tab-nav__item--right.active~.tab-nav__indicator {
         left: 50%;
     }
 }
 
 .tab-content {
-    // width: 200%;
     height: 100%;
     &.sticky-header--padding {
         padding-top: 50px;
@@ -111,24 +108,18 @@
     .tab-content__slider {
         width: 100%;
     }
-    .tab-content__slider--left {
-        &.shown {
-            display: block;
-        }
-        &.hidden {
-            display: none;
-        }
-    }
-    .tab-content__slider--right {
-        display: none;
-        &.shown {
-            display: block;
-        }
-        &.hidden {
-            display: none;
-        }
-    }
     .tab-content__panel {
-        // width: 50%;
+        transition: all 0.4s ease-in-out;
     }
+}
+
+.fade-in {
+    height: auto;
+    opacity: 1;
+}
+
+.fade-out {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
 }

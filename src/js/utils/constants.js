@@ -7,21 +7,21 @@ export const OMDB_POSTER_REQUEST_URL = `http://img.omdbapi.com/?apikey=${OMDB_AP
 
 export const MOVIE_IMAGES_LIST = [
     'https://www.fillmurray.com/g/200/300',
-    'https://www.placecage.com/200/500',
+    'https://www.placecage.com/400/500',
     'https://www.fillmurray.com/600/400',
     'https://www.placecage.com/250/400',
-    'https://www.fillmurray.com/g/200/400',
+    'https://www.fillmurray.com/g/400/400',
     'https://www.placecage.com/g/400/500',
+    'https://www.fillmurray.com/700/800',
+    'https://www.placecage.com/500/500',
+    'https://www.fillmurray.com/g/600/500',
+    'https://www.placecage.com/900/800',
     'https://www.fillmurray.com/300/400',
-    'https://www.placecage.com/300/500',
-    'https://www.fillmurray.com/g/200/500',
-    'https://www.placecage.com/200/600',
-    'https://www.fillmurray.com/300/400',
-    'https://www.placecage.com/g/600/300',
+    'https://www.placecage.com/g/600/500',
     'https://www.fillmurray.com/400/500',
-    'https://www.placecage.com/g/800/300',
+    'https://www.placecage.com/g/900/800',
     'https://www.fillmurray.com/250/300',
-    'https://www.placecage.com/g/200/500'
+    'https://www.placecage.com/g/700/500'
 ]
 
 export const CAST_NAMES = [

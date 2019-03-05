@@ -35,7 +35,7 @@ const actions = {
 store.subscribe(function GET_CAST_IMAGES() {
     const state = store.getState(),
         { castImages } = state,
-        movieCastImagesElement = document.getElementById('movieCastImages')
+        movieCastImagesElement = document.getElementById(properties.id)
 
     if (castImages.length > 0) {
         movieCastImagesElement.innerHTML = castImages

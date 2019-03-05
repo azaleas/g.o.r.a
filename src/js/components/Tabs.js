@@ -9,10 +9,10 @@ const actions = {
         const sliderItem = document.querySelector(
             '.js-tab-content__slider--left'
         )
-        sliderItem.nextElementSibling.classList.remove('shown')
-        sliderItem.nextElementSibling.classList.add('hidden')
-        sliderItem.classList.remove('hidden')
-        sliderItem.classList.add('shown')
+        sliderItem.nextElementSibling.classList.remove('fade-in')
+        sliderItem.nextElementSibling.classList.add('fade-out')
+        sliderItem.classList.remove('fade-out')
+        sliderItem.classList.add('fade-in')
 
         scrollToTop()
     },
@@ -24,10 +24,10 @@ const actions = {
         const sliderItem = document.querySelector(
             '.js-tab-content__slider--right'
         )
-        sliderItem.previousElementSibling.classList.remove('shown')
-        sliderItem.previousElementSibling.classList.add('hidden')
-        sliderItem.classList.remove('hidden')
-        sliderItem.classList.add('shown')
+        sliderItem.previousElementSibling.classList.remove('fade-in')
+        sliderItem.previousElementSibling.classList.add('fade-out')
+        sliderItem.classList.remove('fade-out')
+        sliderItem.classList.add('fade-in')
 
         scrollToTop()
     }
@@ -145,10 +145,10 @@ const Tabs = ({
         </div>
         <div class="tab-content js-tab-content">
             <div class="tab-content__slider js-tab-content__slider">
-                <div class="tab-content__panel tab-content__slider--left js-tab-content__slider--left">
+                <div class="tab-content__panel tab-content__slider--left fade-in js-tab-content__slider--left">
                     ${navbarTabContent.left.content}
                 </div>
-                <div class="tab-content__panel tab-content__slider--right js-tab-content__slider--right">
+                <div class="tab-content__panel tab-content__slider--right fade-out js-tab-content__slider--right">
                     ${navbarTabContent.right.content}
                 </div>
             </div>

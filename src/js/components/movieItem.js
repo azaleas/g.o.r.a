@@ -15,7 +15,7 @@ store.subscribe(function GET_MOVIE_ITEM() {
         routeElement = document.getElementById(properties.id)
 
     if (Object.keys(movie).length > 0) {
-        routeElement.innerHTML = MovieItem({
+        routeElement.outerHTML = MovieItem({
             movie
         })
     }
@@ -63,7 +63,9 @@ const MovieItem = ({ movie = {} } = {}) => {
     }
 
     return `
-        <div id="${properties.id}" class="movie-item js-route-component">
+        <div id="${
+            properties.id
+        }" class="movie-item route-component js-route-component">
             ${
                 Object.keys(movie).length
                     ? Tabs({

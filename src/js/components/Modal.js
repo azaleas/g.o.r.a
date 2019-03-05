@@ -194,7 +194,7 @@ const Modal = () => {
             <div class="modal-items js-modal-items">
                 <div class="modal-item js-modal-item">
                     <div class="modal__image-wrapper js-modal__image-wrapper">
-                        <img src="" alt="Movie Image" class="img-responsive js-modal__image"/>
+                        <img src="" alt="Movie Image" class="modal__image js-modal__image"/>
                     </div>
                     <div class="modal-content">
                         <div class="card">
@@ -210,7 +210,7 @@ const Modal = () => {
                 </div>
                 <div class="modal-item js-modal-item">
                     <div class="modal__image-wrapper js-modal__image-wrapper">
-                        <img src="" alt="Movie Image" class="img-responsive js-modal__image"/>
+                        <img src="" alt="Movie Image" class="modal__image js-modal__image"/>
                     </div>
                     <div class="modal-content">
                         <div class="card">
@@ -226,7 +226,7 @@ const Modal = () => {
                 </div>
                 <div class="modal-item js-modal-item">
                     <div class="modal__image-wrapper js-modal__image-wrapper">
-                        <img src="" alt="Movie Image" class="img-responsive js-modal__image"/>
+                        <img src="" alt="Movie Image" class="modal__image js-modal__image"/>
                     </div>
                     <div class="modal-content">
                         <div class="card">

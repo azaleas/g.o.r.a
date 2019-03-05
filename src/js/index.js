@@ -10,13 +10,18 @@ import CastItem from './components/CastItem'
 import SearchBlock from './components/SearchBlock'
 
 const actions = {
-    changeRoute({ routeElement, routeComonentElements }) {
+    changeRoute({ routeElement }) {
+        const routeComonentElements = document.querySelectorAll(
+            '.js-route-component'
+        )
+
         routeComonentElements.forEach(item => {
             if (item.id !== routeElement.id) {
                 item.classList.add('hidden')
                 item.innerHTML = ''
+            } else {
+                item.classList.remove('hidden')
             }
-            item.classList.remove('hidden')
         })
 
         scrollToTop()
@@ -26,33 +31,30 @@ const actions = {
 store.subscribe(function GET_SEARCH_RESULTS() {
     const state = store.getState(),
         { searchResults } = state,
-        routeElement = document.getElementById('moviesList'),
-        routeComonentElements = document.querySelectorAll('.js-route-component')
+        routeElement = document.getElementById('moviesList')
 
     if (searchResults.length > 0) {
-        actions.changeRoute({ routeElement, routeComonentElements })
+        actions.changeRoute({ routeElement })
     }
 })
 
 store.subscribe(function GET_MOVIE_ITEM() {
     const state = store.getState(),
         { movie } = state,
-        routeElement = document.getElementById('movieItem'),
-        routeComonentElements = document.querySelectorAll('.js-route-component')
+        routeElement = document.getElementById('movieItem')
 
     if (Object.keys(movie).length > 0) {
-        actions.changeRoute({ routeElement, routeComonentElements })
+        actions.changeRoute({ routeElement })
     }
 })
 
 store.subscribe(function GET_CAST_MEMBER() {
     const state = store.getState(),
         { actorInfo } = state,
-        routeElement = document.getElementById('castItem'),
-        routeComonentElements = document.querySelectorAll('.js-route-component')
+        routeElement = document.getElementById('castItem')
 
     if (Object.keys(actorInfo).length > 0) {
-        actions.changeRoute({ routeElement, routeComonentElements })
+        actions.changeRoute({ routeElement })
     }
 })
 

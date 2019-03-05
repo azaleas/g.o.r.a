@@ -1,13 +1,13 @@
 @import 'fonts.scss';
 @import 'icons.scss';
 @import 'variables.scss';
-@import 'helpers.scss';
 @import 'color-classes.scss';
 @import 'animations.scss';
 // General
 @import 'general.scss';
 // Components
 @import 'components/container.scss';
+@import 'components/route-component.scss';
 @import 'components/search-block.scss';
 @import 'components/cast-details-content.scss';
 @import 'components/cast-member-movies-content.scss';
@@ -21,3 +21,5 @@
 @import 'components/search-form.scss';
 @import 'components/movie-information-card.scss';
 @import 'components/loading-indicator.scss';
+//Helpers
+@import 'helpers.scss';

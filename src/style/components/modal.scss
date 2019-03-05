@@ -15,6 +15,9 @@
         background: $color-white;
         transition: all 0.75s cubic-bezier(0.16, 0.76, 0.27, 0.95);
     }
+    @media screen and (min-width: 768px) {
+        border-radius: 10px;
+    }
 }
 
 .modal__image-wrapper {
@@ -50,7 +53,10 @@
     align-items: center;
     line-height: 0;
     background: $color-black;
-    animation: fade-late 1.5s;
+}
+
+.modal__image {
+    height: 100%;
 }
 
 .modal-content {

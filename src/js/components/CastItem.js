@@ -15,7 +15,7 @@ store.subscribe(function GET_CAST_MEMBER() {
         routeElement = document.getElementById(properties.id)
 
     if (Object.keys(actorInfo).length > 0) {
-        routeElement.innerHTML = CastItem({
+        routeElement.outerHTML = CastItem({
             actorInfo
         })
     }
@@ -38,7 +38,9 @@ const CastItem = ({ actorInfo = {} } = {}) => {
     }
 
     return `
-        <div id="${properties.id}" class="cast-item js-route-component">
+        <div id="${
+            properties.id
+        }" class="cast-item route-component js-route-component">
             ${
                 Object.keys(actorInfo).length
                     ? Tabs({
