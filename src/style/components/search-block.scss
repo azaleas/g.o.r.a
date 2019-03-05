@@ -1,0 +1,16 @@
+.search-block {
+    position: relative;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.appName {
+    display: inline-block;
+    margin: auto;
+    line-height: 1em;
+    padding: 10px;
+    text-shadow: -15px 5px 20px #ced0d3;
+    letter-spacing: -0.05em;
+}

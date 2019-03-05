@@ -1,0 +1,6 @@
+.movie-item {
+    overflow: hidden;
+    &.hidden {
+        display: none;
+    }
+}

@@ -1,0 +1,38 @@
+.movies-list {
+    &.hidden {
+        display: none;
+    }
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+.movies-list__item {
+    width: 45%;
+    margin: 1.5%;
+    border-radius: 3px;
+    background: sandybrown;
+    color: black;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(32, 33, 36, 0.28);
+}
+
+.movies-list__image-wrapper {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 200px;
+    border-radius: 3px;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movies-list__image-placeholder-icon {
+    font-size: 75px;
+    color: antiquewhite;
+}
+
+.movies-list__information {
+    margin: 4px;
+}

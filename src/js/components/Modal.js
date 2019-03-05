@@ -38,8 +38,6 @@ const actions = {
     },
 
     modalMoveTouch(e) {
-        e.preventDefault()
-
         const { initialXPosition, initialYPosition } = properties
 
         const currentXPosition = e.touches[0].clientX,

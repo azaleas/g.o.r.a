@@ -2,6 +2,10 @@ import { getMoviesDataByTitle } from './../utils/remoteService'
 
 import { store } from './../store'
 
+const properties = {
+    id: 'searchForm'
+}
+
 const actions = {
     onSearchSubmit(e) {
         e.preventDefault()
@@ -32,11 +36,11 @@ const actions = {
 const SearchForm = () => {
     setTimeout(() => {
         document
-            .getElementById('searchForm')
+            .getElementById(properties.id)
             .addEventListener('submit', actions.onSearchSubmit)
     }, 0)
     return `
-        <form id="searchForm" class="form mar-hor--auto">
+        <form id="${properties.id}" class="form mar-hor--auto">
             <input name="search-input" class="form-input" type="text" placeholder="Search..."/>
             <button type="submit" class="form-submit-btn">
                 <i class="icon-search"></i>

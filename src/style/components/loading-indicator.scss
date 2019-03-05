@@ -1,0 +1,22 @@
+.loading-indicator {
+    display: block;
+    height: 4px;
+    margin: 10px 0;
+}
+
+.loading-indicator--enabled {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #ddd;
+    &::before {
+        display: block;
+        position: absolute;
+        content: '';
+        left: -200px;
+        width: 200px;
+        height: 4px;
+        background-color: $color-blue;
+        animation: loading-indicator 2s linear infinite;
+    }
+}

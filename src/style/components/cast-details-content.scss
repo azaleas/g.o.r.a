@@ -1,0 +1,33 @@
+.movie-cast-images {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.movie-cast-item {
+    width: 125px;
+    background: aliceblue;
+    margin: 4px;
+    border-radius: 7px;
+    box-shadow: 0 1px 3px rgba(32, 33, 36, 0.28);
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-cast-item__actor-image {
+    background: $color-white;
+    border-radius: 7px;
+}
+
+.movie-cast-item__actor-information {
+    padding: 10px;
+}
+
+.movie-cast-item__actor-name {
+    font-size: 0.9em;
+}
+
+.movie-cast-item__actor-role {
+    font-size: 0.75em;
+}

@@ -1,0 +1,109 @@
+.movie-ratings {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px 0;
+    margin: 0 -10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.movie-ratings-item {
+    width: 100%;
+    & + & {
+        border-left: 1px solid #f1f1f1;
+    }
+}
+
+.movie-rating__source {
+    font-size: 0.9em;
+}
+
+.movie-rating__score {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.movie-votes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 0 -10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.movie-votes__vote-icon-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.movie-votes__source {
+    font-size: 0.9em;
+}
+
+.movie-votes__vote-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: rgba(0, 0, 0, 0.38);
+    border: 1px solid #f1f1f1;
+    margin: 0 2px;
+}
+
+.movie-more-information__movie-plot {
+    padding: 20px 0;
+}
+
+.movie-plot__read-more-checkbox:checked ~ .movie-more-information__movie-plot,
+.movie-plot__read-more-checkbox:checked ~ .movie-more-information__movie-plot {
+    .movie-plot__three-dots,
+    .movie-plot__read-more {
+        display: none;
+    }
+    .movie-plot__second-half {
+        display: inline;
+    }
+}
+
+.movie-plot__read-more {
+    color: #70757a;
+}
+
+.movie-plot__second-half {
+    display: none;
+}
+
+.movie-more-information__read-more--trigger {
+    padding: 16px 10px;
+    margin: 10px -10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #f1f1f1;
+}
+
+.movie-more-information__read-more-text {
+    margin-left: 10px;
+    line-height: 0;
+}
+
+.movie-more-information__read-more-checkbox:checked {
+    & ~ .movie-more-information__read-more--trigger {
+        i {
+            transform: rotateX(180deg);
+        }
+        & span:first-of-type {
+            display: none;
+        }
+        & span:last-of-type {
+            display: inline;
+        }
+    }
+    & ~ .movie-more-information--expandable {
+        display: block;
+    }
+}
