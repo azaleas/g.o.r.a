@@ -1,6 +1,5 @@
 import './../style/index.scss'
 import { APP_NAME } from './utils/constants'
-import { getMovieDataByImdbId } from './utils/remoteService'
 import { scrollToTop } from './utils/helperFunctions'
 
 import { store } from './store'
@@ -10,46 +9,23 @@ import MoviesList from './components/MoviesList'
 import MovieItem from './components/MovieItem'
 import CastItem from './components/CastItem'
 
-const actions = {
-    onGetMovie(e) {
-        const movieListItem = e.target.closest('.movies-list__item'),
-            imdbId = movieListItem && movieListItem.dataset.imdbId
-
-        if (imdbId) {
-            store.dispatch({
-                type: 'DATA_LOADING'
-            })
-            getMovieDataByImdbId(imdbId).then(response => {
-                store.dispatch({
-                    type: 'GET_MOVIE_ITEM',
-                    payload: response.data
-                })
-            })
-        }
-    }
-}
-
 store.subscribe(function GET_SEARCH_RESULTS() {
     const state = store.getState(),
         { searchResults, errorMessage } = state,
-        routeElement = document.querySelector('#moviesList'),
+        routeElement = document.getElementById('moviesList'),
         routeComonentElements = document.querySelectorAll(
             '.js-route-component'
         ),
-        loadingIndicatorElement = document.querySelector('#loadingIndicator')
+        loadingIndicatorElement = document.getElementById('loadingIndicator')
 
     loadingIndicatorElement.classList.remove('loading-indicator--enabled')
 
     if (errorMessage.length === 0) {
-        const errorElement = document.querySelector('#error')
+        const errorElement = document.getElementById('error')
         errorElement.innerHTML = ''
     }
 
     if (searchResults.length > 0) {
-        routeElement.innerHTML = MoviesList({
-            moviesList: searchResults
-        })
-
         routeComonentElements.forEach(item => {
             if (item.id !== routeElement.id) {
                 item.classList.add('hidden')
@@ -65,19 +41,15 @@ store.subscribe(function GET_SEARCH_RESULTS() {
 store.subscribe(function GET_MOVIE_ITEM() {
     const state = store.getState(),
         { movie, errorMessage } = state,
-        routeElement = document.querySelector('#movieItem'),
+        routeElement = document.getElementById('movieItem'),
         routeComonentElements = document.querySelectorAll(
             '.js-route-component'
         ),
-        loadingIndicatorElement = document.querySelector('#loadingIndicator')
+        loadingIndicatorElement = document.getElementById('loadingIndicator')
 
     loadingIndicatorElement.classList.remove('loading-indicator--enabled')
 
     if (Object.keys(movie).length > 0) {
-        routeElement.innerHTML = MovieItem({
-            movie
-        })
-
         routeComonentElements.forEach(item => {
             if (item.id !== routeElement.id) {
                 item.classList.add('hidden')
@@ -90,7 +62,7 @@ store.subscribe(function GET_MOVIE_ITEM() {
     }
 
     if (errorMessage.length === 0) {
-        const errorElement = document.querySelector('#error')
+        const errorElement = document.getElementById('error')
         errorElement.innerHTML = ''
     }
 })
@@ -98,19 +70,15 @@ store.subscribe(function GET_MOVIE_ITEM() {
 store.subscribe(function GET_CAST_MEMBER() {
     const state = store.getState(),
         { actorInfo, errorMessage } = state,
-        routeElement = document.querySelector('#castItem'),
+        routeElement = document.getElementById('castItem'),
         routeComonentElements = document.querySelectorAll(
             '.js-route-component'
         ),
-        loadingIndicatorElement = document.querySelector('#loadingIndicator')
+        loadingIndicatorElement = document.getElementById('loadingIndicator')
 
     loadingIndicatorElement.classList.remove('loading-indicator--enabled')
 
     if (Object.keys(actorInfo).length > 0) {
-        routeElement.innerHTML = CastItem({
-            actorInfo
-        })
-
         routeComonentElements.forEach(item => {
             if (item.id !== routeElement.id) {
                 item.classList.add('hidden')
@@ -123,7 +91,7 @@ store.subscribe(function GET_CAST_MEMBER() {
     }
 
     if (errorMessage.length === 0) {
-        const errorElement = document.querySelector('#error')
+        const errorElement = document.getElementById('error')
         errorElement.innerHTML = ''
     }
 })
@@ -131,8 +99,8 @@ store.subscribe(function GET_CAST_MEMBER() {
 store.subscribe(function ERROR() {
     const state = store.getState(),
         { errorMessage } = state,
-        errorElement = document.querySelector('#error'),
-        loadingIndicatorElement = document.querySelector('#loadingIndicator')
+        errorElement = document.getElementById('error'),
+        loadingIndicatorElement = document.getElementById('loadingIndicator')
 
     loadingIndicatorElement.classList.remove('loading-indicator--enabled')
 
@@ -142,12 +110,37 @@ store.subscribe(function ERROR() {
 })
 
 store.subscribe(function GET_SEARCH_RESULTS() {
-    const searchBlockElement = document.querySelector('#searchBlock')
+    const state = store.getState(),
+        { searchResults, errorMessage } = state,
+        routeElement = document.getElementById('moviesList'),
+        routeComonentElements = document.querySelectorAll(
+            '.js-route-component'
+        ),
+        loadingIndicatorElement = document.getElementById('loadingIndicator')
+
+    loadingIndicatorElement.classList.remove('loading-indicator--enabled')
+
+    if (errorMessage.length === 0) {
+        const errorElement = document.getElementById('error')
+        errorElement.innerHTML = ''
+    }
+
+    if (searchResults.length > 0) {
+        routeComonentElements.forEach(item => {
+            if (item.id !== routeElement.id) {
+                item.classList.add('hidden')
+                item.innerHTML = ''
+            }
+            item.classList.remove('hidden')
+        })
+        scrollToTop()
+    }
+    const searchBlockElement = document.getElementById('searchBlock')
     searchBlockElement.classList.remove('center--vertical')
 })
 
 store.subscribe(function DATA_LOADING() {
-    const loadingIndicatorElement = document.querySelector('#loadingIndicator')
+    const loadingIndicatorElement = document.getElementById('loadingIndicator')
     loadingIndicatorElement.classList.add('loading-indicator--enabled')
 })
 
@@ -165,17 +158,10 @@ const appMarkup = `
             <div id="error" class="error text-center mar-hor--auto">
             </div>
         </div>
-        <div id="moviesList" class="movies-list js-route-component">
-        </div>
-        <div id="movieItem" class="movie-item js-route-component">
-        </div>
-        <div id="castItem" class="cast-item js-route-component">
-        </div>
+        ${MoviesList()}
+        ${MovieItem()}
+        ${CastItem()}
     </div>
 `
 
-document.querySelector('#app').innerHTML = appMarkup
-
-document
-    .querySelector('#moviesList')
-    .addEventListener('click', actions.onGetMovie)
+document.getElementById('app').innerHTML = appMarkup

@@ -543,12 +543,10 @@ p {
 
 .modal__image-wrapper {
     position: relative;
-    border: 1px solid transparent; // height: 300px;
     z-index: 1;
     display: flex;
     justify-content: center;
-    transition: all 0.75s; // background-size: contain; // background-repeat: no-repeat;
-    // background-position: center center;
+    transition: all 0.75s;
 }
 
 .fade-out {

@@ -32,7 +32,7 @@ const actions = {
 const SearchForm = () => {
     setTimeout(() => {
         document
-            .querySelector('#searchForm')
+            .getElementById('searchForm')
             .addEventListener('submit', actions.onSearchSubmit)
     }, 0)
     return `

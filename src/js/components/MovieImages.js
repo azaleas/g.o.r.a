@@ -114,7 +114,6 @@ const actions = {
             modalNavCloseElement = document.querySelector(
                 '.js-modal-nav-close'
             ),
-            // screenElement = document.querySelector('.screen'),
             sliderItemElement = e.target.closest('.js-images-slider__item'),
             targetElement = e.target
 

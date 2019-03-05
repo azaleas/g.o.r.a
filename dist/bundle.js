@@ -516,8 +516,8 @@
         }
         o.store.subscribe(function() {
             var e = o.store.getState().searchResults,
-                t = document.querySelector('#moviesList'),
-                n = document.querySelector('#movieItem')
+                t = document.getElementById('moviesList'),
+                n = document.getElementById('movieItem')
             e.length > 0 &&
                 ((t.innerHTML = (0, s.default)({ moviesList: e })),
                 n.classList.remove('shown'),
@@ -527,8 +527,8 @@
         }),
             o.store.subscribe(function() {
                 var e = o.store.getState().movie,
-                    t = document.querySelector('#moviesList'),
-                    n = document.querySelector('#movieItem')
+                    t = document.getElementById('moviesList'),
+                    n = document.getElementById('movieItem')
                 Object.keys(e).length > 0 &&
                     ((n.innerHTML = (0, a.default)({ movie: e })),
                     t.classList.remove('shown'),
@@ -540,8 +540,8 @@
             '\n    <div class="container container--full-height">\n        ' +
             (0, i.default)() +
             '\n        <div id="moviesList" class="movies-list">\n        </div>\n        <div id="movieItem" class="movie-item">\n        </div>\n    </div>\n'
-        ;(document.querySelector('#app').innerHTML = l),
-            document.querySelector('#moviesList').addEventListener('click', u)
+        ;(document.getElementById('app').innerHTML = l),
+            document.getElementById('moviesList').addEventListener('click', u)
     },
     function(e, t, n) {},
     function(e, t, n) {
@@ -1229,14 +1229,14 @@
             }
         o.store.subscribe(function() {
             document
-                .querySelector('#searchForm')
+                .getElementById('searchForm')
                 .classList.remove('center--vertical')
         })
         t.default = function() {
             return (
                 setTimeout(function() {
                     document
-                        .querySelector('#searchForm')
+                        .getElementById('searchForm')
                         .addEventListener('submit', i)
                 }, 0),
                 '\n        <form id="searchForm" class="form center--vertical full-width">\n            <input name="search-input" class="form-input" type="text" placeholder="Search..."/>\n            <button type="submit" class="form-submit-btn">\n                Search\n            </button>\n        </form>\n    '
@@ -1334,7 +1334,7 @@
             }
         o.store.subscribe(function() {
             var e = o.store.getState().movieImages,
-                t = document.querySelector('#movieImagesslider')
+                t = document.getElementById('movieImagesslider')
             e.length > 0 &&
                 (t.innerHTML = e
                     .map(function(e) {
@@ -1402,7 +1402,7 @@
             }
         o.store.subscribe(function() {
             var e = o.store.getState().castImages,
-                t = document.querySelector('#movieCastImages')
+                t = document.getElementById('movieCastImages')
             e.length > 0 &&
                 (t.innerHTML = e
                     .map(function(e) {

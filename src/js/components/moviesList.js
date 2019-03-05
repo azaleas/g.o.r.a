@@ -1,9 +1,57 @@
-const MoviesList = ({ moviesList }) =>
-    moviesList
-        .map(
-            movie =>
-                `
-                <div class="movies-list__item cur-pointer" data-imdb-id=${
+import { store } from './../store'
+import { getMovieDataByImdbId } from './../utils/remoteService'
+
+const properties = {
+    id: 'moviesList'
+}
+
+const actions = {
+    onGetMovie(e) {
+        const movieListItem = e.target.closest('.js-movies-list__item'),
+            imdbId = movieListItem && movieListItem.dataset.imdbId
+
+        if (imdbId) {
+            store.dispatch({
+                type: 'DATA_LOADING'
+            })
+            getMovieDataByImdbId(imdbId).then(response => {
+                store.dispatch({
+                    type: 'GET_MOVIE_ITEM',
+                    payload: response.data
+                })
+            })
+        }
+    }
+}
+
+store.subscribe(function GET_SEARCH_RESULTS() {
+    const state = store.getState(),
+        { searchResults } = state,
+        routeElement = document.getElementById(properties.id)
+
+    if (searchResults.length > 0) {
+        routeElement.innerHTML = MoviesList({
+            moviesList: searchResults
+        })
+    }
+})
+
+const MoviesList = ({ moviesList = [] } = {}) => {
+    setTimeout(() => {
+        document
+            .getElementById(properties.id)
+            .addEventListener('click', actions.onGetMovie)
+    }, 0)
+
+    return `
+    <div id="${properties.id}" class="movies-list js-route-component">
+        ${
+            moviesList.length > 0
+                ? moviesList
+                      .map(
+                          movie =>
+                              `
+                <div class="movies-list__item js-movies-list__item cur-pointer" data-imdb-id=${
                     movie.imdbID
                 }>
                     <div class="movies-list__image-wrapper" ${
@@ -28,7 +76,11 @@ const MoviesList = ({ moviesList }) =>
                     </div>
                 </div>
             `
-        )
-        .join('')
-
+                      )
+                      .join('')
+                : ``
+        }
+    </div>
+    `
+}
 export default MoviesList
