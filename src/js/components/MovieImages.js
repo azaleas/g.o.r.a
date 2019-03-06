@@ -6,7 +6,8 @@ import Modal from './Modal'
 import ImagesSlider from './ImagesSlider'
 
 const properties = {
-    jsImageSliderClassIdentifier: 'js-movie-images-slider'
+    jsImageSliderClassIdentifier: 'js-movie-images-slider',
+    id: 'movieImages'
 }
 
 const actions = {
@@ -25,9 +26,9 @@ const actions = {
             ),
             modalItemsElement = document.querySelector('.js-modal-items'),
             modalItemElements = document.querySelectorAll('.js-modal-item'),
-            windowWidth = window.innerWidth,
             state = store.getState(),
-            { movieImages } = state
+            { movieImages } = state,
+            movieImagesElement = document.getElementById(properties.id)
 
         let imageSources = []
 
@@ -44,13 +45,12 @@ const actions = {
             })
 
             setElementAttributes(modalItemElements[1], {
-                style: `transform: translate3d(${windowWidth}px,0,0)`,
-                'data-index': imageIndex + 1,
-                'data-translate-value': `${windowWidth}`
+                style: `transform: translate3d(100%,0,0)`,
+                'data-index': imageIndex + 1
             })
 
             setElementAttributes(modalItemElements[2], {
-                style: `transform: translate3d(${2 * windowWidth}px,0,0)`,
+                style: `transform: translate3d(200%,0,0)`,
                 'data-index': imageIndex + 2
             })
 
@@ -61,12 +61,12 @@ const actions = {
             imageSources.push(movieImages[imageIndex])
 
             setElementAttributes(modalItemElements[0], {
-                style: `transform: translate3d(-${2 * windowWidth}px,0,0)`,
+                style: `transform: translate3d(-200%,0,0)`,
                 'data-index': imageIndex - 2
             })
 
             setElementAttributes(modalItemElements[1], {
-                style: `transform: translate3d(-${windowWidth}px,0,0)`,
+                style: `transform: translate3d(-100%,0,0)`,
                 'data-index': imageIndex - 1
             })
 
@@ -82,7 +82,7 @@ const actions = {
             imageSources.push(movieImages[imageIndex + 1])
 
             setElementAttributes(modalItemElements[0], {
-                style: `transform: translate3d(-${windowWidth}px,0,0)`,
+                style: `transform: translate3d(-100%,0,0)`,
                 'data-index': imageIndex - 1
             })
 
@@ -92,7 +92,7 @@ const actions = {
             })
 
             setElementAttributes(modalItemElements[2], {
-                style: `transform: translate3d(${windowWidth}px,0,0)`,
+                style: `transform: translate3d(100%,0,0)`,
                 'data-index': imageIndex + 1
             })
 
@@ -103,12 +103,15 @@ const actions = {
         modalImageElements.forEach((item, index) =>
             setElementAttributes(item, {
                 src: imageSources[index],
-                width: `${windowWidth}px`
+                width: `${movieImagesElement.offsetWidth}px`
             })
         )
-        modalItemElements.forEach((item, index) =>
+        modalItemElements.forEach((item, index) => {
+            if (!item.classList.contains('active')) {
+                item.classList.add('hidden')
+            }
             item.setAttribute('data-modal-item-index', index)
-        )
+        })
     },
 
     enableModal(e) {
@@ -140,8 +143,23 @@ const actions = {
                 bottom: ${window.innerHeight - bottom}px;`
             )
 
+            function transitionEnd() {
+                const modalItemElements = document.querySelectorAll(
+                    '.js-modal-item'
+                )
+
+                modalItemElements.forEach(item =>
+                    item.classList.remove('hidden')
+                )
+
+                modalElement.removeEventListener('transitionend', transitionEnd)
+            }
+
+            modalElement.addEventListener('transitionend', transitionEnd)
+
             setTimeout(() => {
                 modalElement.classList.add('active')
+
                 if (window.innerWidth < 768) {
                     modalNavCloseElement.setAttribute(
                         'style',
@@ -205,10 +223,12 @@ const MovieImages = movie => {
         )
     }, 0)
     return `
-        ${ImagesSlider({
-            jsClassIdentifier: properties.jsImageSliderClassIdentifier
-        })}
-        ${Modal()}
+        <div id="movieImages">
+            ${ImagesSlider({
+                jsClassIdentifier: properties.jsImageSliderClassIdentifier
+            })}
+            ${Modal()}
+        </div>
     `
 }
 

@@ -3,7 +3,8 @@ import { store } from './../store'
 
 const properties = {
     initialXPosition: null,
-    initialYPosition: null
+    isLocked: false,
+    newTranslateX: null
 }
 
 const actions = {
@@ -34,51 +35,82 @@ const actions = {
 
     modalStartTouch(e) {
         properties.initialXPosition = e.touches[0].clientX
-        properties.initialYPosition = e.touches[0].clientY
+        properties.newTranslateX = 0
+        properties.isLocked = true
     },
 
     modalMoveTouch(e) {
-        const { initialXPosition, initialYPosition } = properties
+        const { initialXPosition, isLocked } = properties
 
         const currentXPosition = e.touches[0].clientX,
-            currentYPosition = e.touches[0].clientY,
+            windowWidth = window.innerWidth,
+            state = store.getState(),
             diffX = initialXPosition - currentXPosition,
-            diffY = initialYPosition - currentYPosition
-
-        const activeModalItemElement = document.querySelector(
+            modalItemsElement = document.querySelector('.js-modal-items'),
+            activeModalItemElement = document.querySelector(
                 '.js-modal-item.active'
             ),
+            activeDataIndex = +activeModalItemElement.dataset.index,
+            { left, right } = modalItemsElement.getBoundingClientRect(),
+            touchingWithinContainerLimits =
+                currentXPosition >= left && currentXPosition <= right
+
+        if (isLocked && touchingWithinContainerLimits) {
+            const diff = +(diffX / windowWidth).toFixed(3)
+
+            let newTranslateX = activeDataIndex + diff * 100
+
+            if (
+                (activeDataIndex === 0 && newTranslateX < 0) ||
+                (activeDataIndex === state.movieImages.length - 1 &&
+                    newTranslateX > 0)
+            ) {
+                newTranslateX = 0
+            }
+
+            modalItemsElement.setAttribute(
+                'style',
+                `transform: translate3d(${-newTranslateX}%,0,0)`
+            )
+
+            properties.newTranslateX = newTranslateX
+        }
+    },
+
+    modalEndTouch(e) {
+        properties.initialXPosition = null
+        properties.isLocked = false
+
+        const { newTranslateX } = properties,
             modalItemsElement = document.querySelector('.js-modal-items'),
             modalItemElements = document.querySelectorAll('.js-modal-item'),
-            activeDataIndex = +activeModalItemElement.dataset.index,
+            activeModalItemElement = document.querySelector(
+                '.js-modal-item.active'
+            ),
             currentModalItemIndex = +activeModalItemElement.dataset
                 .modalItemIndex,
-            windowWidth = window.innerWidth,
+            activeDataIndex = +activeModalItemElement.dataset.index,
             state = store.getState()
 
-        if (Math.abs(diffX) > Math.abs(diffY)) {
-            // sliding horizontally
-            if (diffX < 0 && activeDataIndex > 0) {
-                setTimeout(function() {
-                    modalItemsElement.setAttribute(
-                        'style',
-                        `transform: translate3d(${windowWidth}px,0,0)`
-                    )
-
-                    const next =
-                            currentModalItemIndex === 2
-                                ? 0
-                                : currentModalItemIndex + 1,
-                        prev =
-                            currentModalItemIndex === 0
-                                ? 2
-                                : currentModalItemIndex - 1,
-                        nextItemElement = modalItemElements[next],
-                        currentItemElement =
-                            modalItemElements[currentModalItemIndex],
-                        prevItemElement = modalItemElements[prev]
-
+        if (newTranslateX >= 15 || newTranslateX <= -15) {
+            const next =
+                    currentModalItemIndex === 2 ? 0 : currentModalItemIndex + 1,
+                prev =
+                    currentModalItemIndex === 0 ? 2 : currentModalItemIndex - 1,
+                nextItemElement = modalItemElements[next],
+                currentItemElement = modalItemElements[currentModalItemIndex],
+                prevItemElement = modalItemElements[prev]
+            if (newTranslateX <= -15) {
+                modalItemsElement.setAttribute(
+                    'style',
+                    'transform: translate3d(100%,0,0); transition: all 0.2s linear;'
+                )
+                setTimeout(() => {
                     prevItemElement.setAttribute(
+                        'style',
+                        'transform: translate3d(0,0,0);'
+                    )
+                    modalItemsElement.setAttribute(
                         'style',
                         'transform: translate3d(0,0,0);'
                     )
@@ -86,57 +118,41 @@ const actions = {
 
                     currentItemElement.setAttribute(
                         'style',
-                        `transform: translate3d(${windowWidth}px,0,0)`
+                        `transform: translate3d(100%,0,0)`
                     )
                     currentItemElement.classList.remove('active')
 
-                    if (activeDataIndex - 2 >= 0) {
-                        nextItemElement.classList.add('hidden')
-                        setElementAttributes(nextItemElement, {
-                            style: `transform: translate3d(-${windowWidth}px,0,0);`,
-                            'data-index': `${activeDataIndex - 2}`
-                        })
+                    setElementAttributes(nextItemElement, {
+                        style: `transform: translate3d(-100%,0,0);`,
+                        'data-index': `${activeDataIndex - 2}`
+                    })
 
+                    nextItemElement.classList.add('hidden')
+                    setTimeout(() => {
+                        modalItemElements[next].classList.remove('hidden')
+                    }, 100)
+
+                    if (activeDataIndex - 2 >= 0) {
                         nextItemElement
                             .querySelector('.js-modal__image')
                             .setAttribute(
                                 'src',
                                 state.movieImages[activeDataIndex - 2]
                             )
-
-                        setTimeout(() => {
-                            modalItemElements[next].classList.remove('hidden')
-                        }, 400)
                     }
-                    modalItemsElement.setAttribute(
-                        'style',
-                        'transform: translate3d(0,0,0)'
-                    )
-                }, 400)
-            } else if (
-                diffX > 0 &&
-                activeDataIndex + 2 <= state.movieImages.length
-            ) {
-                setTimeout(function() {
-                    modalItemsElement.setAttribute(
-                        'style',
-                        `transform: translate3d(-${windowWidth}px,0,0)`
-                    )
+                }, 200)
+            } else if (newTranslateX >= 15) {
+                modalItemsElement.setAttribute(
+                    'style',
+                    `transform: translate3d(-100%,0,0); transition: all 0.2s linear;`
+                )
 
-                    const next =
-                            currentModalItemIndex === 2
-                                ? 0
-                                : currentModalItemIndex + 1,
-                        prev =
-                            currentModalItemIndex === 0
-                                ? 2
-                                : currentModalItemIndex - 1,
-                        nextItemElement = modalItemElements[next],
-                        currentItemElement =
-                            modalItemElements[currentModalItemIndex],
-                        prevItemElement = modalItemElements[prev]
-
+                setTimeout(() => {
                     nextItemElement.setAttribute(
+                        'style',
+                        'transform: translate3d(0,0,0);'
+                    )
+                    modalItemsElement.setAttribute(
                         'style',
                         'transform: translate3d(0,0,0);'
                     )
@@ -144,38 +160,36 @@ const actions = {
 
                     currentItemElement.setAttribute(
                         'style',
-                        `transform: translate3d(-${windowWidth}px,0,0)`
+                        `transform: translate3d(-100%,0,0)`
                     )
                     currentItemElement.classList.remove('active')
 
-                    if (activeDataIndex < state.movieImages.length - 2) {
-                        prevItemElement.classList.add('hidden')
-                        setElementAttributes(prevItemElement, {
-                            style: `transform: translate3d(${windowWidth}px,0,0);`,
-                            'data-index': `${activeDataIndex + 2}`
-                        })
+                    setElementAttributes(prevItemElement, {
+                        style: `transform: translate3d(100%,0,0);`,
+                        'data-index': `${activeDataIndex + 2}`
+                    })
 
+                    prevItemElement.classList.add('hidden')
+                    setTimeout(() => {
+                        modalItemElements[prev].classList.remove('hidden')
+                    }, 100)
+
+                    if (activeDataIndex < state.movieImages.length - 2) {
                         prevItemElement
                             .querySelector('.js-modal__image')
                             .setAttribute(
                                 'src',
                                 state.movieImages[activeDataIndex + 2]
                             )
-
-                        setTimeout(() => {
-                            modalItemElements[prev].classList.remove('hidden')
-                        }, 400)
                     }
-                    modalItemsElement.setAttribute(
-                        'style',
-                        'transform: translate3d(0,0,0)'
-                    )
-                }, 400)
+                }, 200)
             }
+        } else {
+            modalItemsElement.setAttribute(
+                'style',
+                'transform: translate3d(0,0,0); transition: all 0.2s linear;'
+            )
         }
-
-        properties.initialXPosition = null
-        properties.initialYPosition = null
     }
 }
 
@@ -186,6 +200,7 @@ const Modal = () => {
 
         modalElement.addEventListener('touchstart', actions.modalStartTouch)
         modalElement.addEventListener('touchmove', actions.modalMoveTouch)
+        modalElement.addEventListener('touchend', actions.modalEndTouch)
         modalNavCloseElement.addEventListener('click', actions.close)
     }, 0)
     return `
