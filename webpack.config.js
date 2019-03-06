@@ -1,7 +1,9 @@
 const path = require('path'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
-    MiniCssExtractPlugin = require('mini-css-extract-plugin')
-AutoprefixerPlugin = require('autoprefixer')
+    MiniCssExtractPlugin = require('mini-css-extract-plugin'),
+    AutoprefixerPlugin = require('autoprefixer'),
+    UglifyJsPlugin = require('uglifyjs-webpack-plugin'),
+    OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = (env, argv) => ({
     entry: {
@@ -10,6 +12,16 @@ module.exports = (env, argv) => ({
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
+    },
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: true
+            }),
+            new OptimizeCSSAssetsPlugin({})
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -73,5 +85,5 @@ module.exports = (env, argv) => ({
     },
 
     watch: argv.mode === 'development' ? true : false,
-    devtool: argv.mode === 'development' ? 'source-map' : ''
+    devtool: argv.mode === 'development' ? 'inline-source-map' : 'source-map'
 })

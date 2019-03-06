@@ -70,6 +70,7 @@ export function getCastMember({ actorId, actorName }) {
         const actorInfo = {
             poster: `//robohash.org/${actorName}`,
             actorName,
+            actorGender: Math.round(Math.random()),
             actorNationality: 'American',
             actorImages,
             actorMovies: state.searchResults

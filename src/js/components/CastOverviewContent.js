@@ -1,5 +1,4 @@
 import ImagesSlider from './ImagesSlider'
-import MovieInformationCard from './MovieInformationCard'
 
 const CastOverviewContent = ({ actorInfo }) => {
     return `
@@ -9,9 +8,11 @@ const CastOverviewContent = ({ actorInfo }) => {
         })}
             <div class="actor-info color-white">
                 <p class="actor-info__name">${actorInfo.actorName}</p>
-                <p class="actor-info__nationality color-gray">${
-                    actorInfo.actorNationality
-                }</p>
+                <p 
+                    class="actor-info__nationality color-gray">
+                    ${actorInfo.actorNationality}
+                    ${actorInfo.actorGender === 1 ? 'actor' : 'actress'}
+                </p>
             </div>
             <div class="card">
                 <p>

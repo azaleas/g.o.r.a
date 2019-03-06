@@ -9,6 +9,8 @@ import CastItem from './components/CastItem'
 
 import SearchBlock from './components/SearchBlock'
 
+import globalEvents from './utils/globalEvents'
+
 const actions = {
     changeRoute({ routeElement }) {
         const routeComonentElements = document.querySelectorAll(
@@ -21,6 +23,21 @@ const actions = {
                 item.innerHTML = ''
             } else {
                 item.classList.remove('hidden')
+            }
+        })
+
+        // Cleanup global event handlers if element doesn't exist anymore
+
+        Object.keys(globalEvents).forEach(key => {
+            const event = globalEvents[key],
+                el = document.querySelector(event.identifier)
+
+            if (!el) {
+                window.removeEventListener(
+                    event.type,
+                    event.action,
+                    event.useCapture
+                )
             }
         })
 

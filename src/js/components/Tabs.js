@@ -1,5 +1,5 @@
 import { scrollToTop } from './../utils/helperFunctions'
-import { globalEvents } from './../utils/globalEvents'
+import globalEvents from './../utils/globalEvents'
 
 const actions = {
     onTabItemLeft(e) {
@@ -38,9 +38,6 @@ const Tabs = ({
     navBarDropDownMenuElements = [],
     navbarTabContent = {}
 }) => {
-    window.removeEventListener('scroll', globalEvents.onStickyHeader, true)
-    window.removeEventListener('click', globalEvents.onNavbarToggle, true)
-
     setTimeout(() => {
         document
             .querySelector('.js-tab-nav__item--left')
@@ -49,59 +46,17 @@ const Tabs = ({
             .querySelector('.js-tab-nav__item--right')
             .addEventListener('click', actions.onTabItemRight)
 
-        const headerElement = document.querySelector('.js-tab-nav'),
-            headerElementOffsetTop = headerElement.offsetTop,
-            tabContentElement = document.querySelector('.js-tab-content'),
-            containerElement = document.querySelector('.js-container'),
-            navbarDropdownMenuButtonElement = document.querySelector(
-                '.navbar-dropdown-menu__button'
-            ),
-            navbarDropdownMenuContentElement = document.querySelector(
-                '.js-navbar-dropdown-menu__content'
-            )
-
-        globalEvents.onStickyHeader = e => {
-            if (e.target === document) {
-                if (window.pageYOffset > headerElementOffsetTop) {
-                    headerElement.classList.add('sticky')
-                    tabContentElement.classList.add('sticky-header--padding')
-                } else {
-                    headerElement.classList.remove('sticky')
-                    tabContentElement.classList.remove('sticky-header--padding')
-                }
-            } else if (e.target === containerElement) {
-                if (containerElement.scrollTop > headerElementOffsetTop) {
-                    headerElement.classList.add('sticky')
-                    headerElement.style.top = `${containerElement.offsetTop}px`
-                    tabContentElement.classList.add('sticky-header--padding')
-                } else {
-                    headerElement.classList.remove('sticky')
-                    headerElement.style.top = ''
-                    tabContentElement.classList.remove('sticky-header--padding')
-                }
-            }
-        }
-
-        globalEvents.onNavbarToggle = e => {
-            const navbarButtonClicked =
-                e.target === navbarDropdownMenuButtonElement ||
-                e.target.parentElement === navbarDropdownMenuButtonElement
-            if (navbarButtonClicked) {
-                navbarDropdownMenuContentElement.classList.toggle('hidden')
-            } else {
-                if (
-                    !navbarDropdownMenuContentElement.classList.contains(
-                        'hidden'
-                    )
-                ) {
-                    navbarDropdownMenuContentElement.classList.add('hidden')
-                }
-            }
-        }
-
-        window.addEventListener('scroll', globalEvents.onStickyHeader, true)
+        window.addEventListener(
+            globalEvents.onStickyHeader.type,
+            globalEvents.onStickyHeader.action,
+            globalEvents.onStickyHeader.useCapture
+        )
         if (navBarDropDownMenuElements.length) {
-            window.addEventListener('click', globalEvents.onNavbarToggle, true)
+            window.addEventListener(
+                globalEvents.onNavbarToggle.type,
+                globalEvents.onNavbarToggle.action,
+                globalEvents.onNavbarToggle.useCapture
+            )
         }
     }, 0)
 
@@ -111,7 +66,7 @@ const Tabs = ({
                 ${navbarInfoBlock}
                 ${
                     navBarDropDownMenuElements.length
-                        ? `<div class="navbar-dropdown-menu">
+                        ? `<div class="navbar-dropdown-menu js-navbar-dropdown-menu">
                         <div class="navbar-dropdown-menu__button cur-pointer js-navbar-dropdown-menu__button">
                             <i class="icon-burger-slim"></i>
                         </div>
