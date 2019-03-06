@@ -18,7 +18,10 @@ module.exports = (env, argv) => ({
             new UglifyJsPlugin({
                 cache: true,
                 parallel: true,
-                sourceMap: true
+                sourceMap: true,
+                uglifyOptions: {
+                    keep_fnames: true
+                }
             }),
             new OptimizeCSSAssetsPlugin({})
         ]
